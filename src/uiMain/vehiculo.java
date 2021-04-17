@@ -1,4 +1,5 @@
 package uiMain;
 
-public class vehiculo {
+public class vehiculo{
+    
 }
