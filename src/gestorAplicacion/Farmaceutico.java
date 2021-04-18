@@ -1,14 +1,16 @@
 package gestorAplicacion;
-import java.util.Scanner;
-
 
 public class Farmaceutico extends Persona{
-    String contraseña;
-
-    public static Scanner input = new Scanner(System.in);
+    private String contraseña;
 
     public Farmaceutico(String nombre, int edad, int documento, String contraseña) {
-        super(nombre, edad, documento);
+        setNombre(nombre);
+        setDocumento(documento);
+        setEdad(edad);
         this.contraseña = contraseña;
+    }
+
+    public String getContraseña(){
+        return contraseña;
     }
 }

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Interfaz {
+    public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null,0,0,null);
     public static LinkedList<Farmaceutico> farmaceuticos = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
 
@@ -18,7 +19,7 @@ public class Interfaz {
             System.out.println("-----------------------------");
             System.out.println("Bienvenido ");
             System.out.println("Escoja una opcion:");
-            System.out.println("1. Ingresar usuario");
+            System.out.println("1. Ingresar farmaceutico");
             System.out.println("2. Registrar usuario");
             System.out.println("0. Salir");
             System.out.println("-----------------------------");
@@ -40,6 +41,7 @@ public class Interfaz {
             }
         }
     }
+
     public static void registrarFarmaceutico() {
 
         System.out.print("Documento : ");
@@ -78,15 +80,104 @@ public class Interfaz {
         farmaceuticos.add(nuevoFarmaceutico);
 
 
-        System.out.println("USUARIO REGISTRADO EXITOSAMENTE");
+        System.out.println("FARMACEUTICO REGISTRADO EXITOSAMENTE");
         ingresarFarmaceutico();
     }
 
-    public static void ingresarFarmaceutico(){
-        if(farmaceuticos.isEmpty()){
+    public static void ingresarFarmaceutico() {
+        if (farmaceuticos.isEmpty()) {
             System.out.println("No hay farmaceuticos registrados!");
             System.out.println("Registre un Farmaceutico :");
             registrarFarmaceutico();
+        }
+        System.out.println("-----------------------------");
+        System.out.println("Ingresar Documento");
+        System.out.println("-----------------------------");
+        int DocumentoIngresado = input.nextInt();
+        System.out.println("-----------------------------");
+        System.out.println("Ingresa la contraseña");
+        System.out.println("-----------------------------");
+        input.nextLine();
+        String PasswordIngresado = input.nextLine();
+
+        for (Farmaceutico farmaceutico : farmaceuticos) {
+            if (farmaceutico.getDocumento() == DocumentoIngresado && farmaceutico.getContraseña().equals(PasswordIngresado)) {
+                        System.out.println("-----------------------------");
+                        System.out.println("LOGUEADO CORRECTAMENTE");
+                        System.out.println("logueando...................");
+                        farmaceuticoLogueado = farmaceutico;
+                        menuPrincipal();
+                        return;
+                    }
+                }
+            }
+
+    private static void menuPrincipal() {
+        String option;
+
+        System.out.println("Bienvenido " + farmaceuticoLogueado.getNombre());
+
+        label:
+        while (true) {
+
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion:");
+            System.out.println("1. Metodo1");
+            System.out.println("2. Metodo2");
+            System.out.println("3. Metodo3");
+            System.out.println("4. Metodo4");
+            System.out.println("0. Salir y cancelar");
+            System.out.println("-----------------------------");
+            option = input.next();
+            switch (option) {
+                case "1":
+                    //administracion();
+
+
+                    break;
+                case "2":
+                    //busqueda();
+
+
+                    break;
+                case "3":
+                    //diagnostico();
+
+
+                    break;
+                case "4":
+                    //guardar();
+
+
+                    break;
+                case "0":
+                    salirCancelar();
+                    break label;
+
+                }
+            }
+        }
+    private static void salirCancelar() {
+        while(true){
+            System.out.println("Si sale ahora se perderan los cambios sin guardar");
+            System.out.println("Ingrese [N] si desea regresar al  menu principal");
+            System.out.println("Ingrese [Y] si desea cerrar el programa");
+            String cerrado = input.next();
+
+            if (cerrado.equals("N")||cerrado.equals("n")) {
+                System.out.println("Regresando al menu principal");
+
+                return;
+            }
+            else if (cerrado.equals("Y")||cerrado.equals("y")) {
+                System.out.println("CERRANDO PROGRAMA");
+                System.exit(0);
+
+            } else {
+                System.out.println("Opcion invalida");
+                System.out.println("-----------------------------");
+
+            }
         }
     }
 }
