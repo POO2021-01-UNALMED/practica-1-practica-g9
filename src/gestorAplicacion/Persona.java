@@ -9,6 +9,5 @@ public class Persona {
         this.nombre = nombre;
         this.edad = edad;
         this.documento = documento;
-
     }
 }
