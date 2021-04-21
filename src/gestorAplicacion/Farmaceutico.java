@@ -1,16 +1,18 @@
 package gestorAplicacion;
 
 public class Farmaceutico extends Persona{
-    private String contraseña;
+    private String password;
 
-    public Farmaceutico(String nombre, int edad, int documento, String contraseña) {
-        setNombre(nombre);
-        setDocumento(documento);
-        setEdad(edad);
-        this.contraseña = contraseña;
+    public Farmaceutico(String nombre, int edad, int documento, String password) {
+        super(nombre,edad,documento);
+        this.password = password;
     }
 
-    public String getContraseña(){
-        return contraseña;
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 }

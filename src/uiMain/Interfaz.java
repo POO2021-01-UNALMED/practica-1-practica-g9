@@ -101,7 +101,7 @@ public class Interfaz {
         String PasswordIngresado = input.nextLine();
 
         for (Farmaceutico farmaceutico : farmaceuticos) {
-            if (farmaceutico.getDocumento() == DocumentoIngresado && farmaceutico.getContraseña().equals(PasswordIngresado)) {
+            if (farmaceutico.getDocumento() == DocumentoIngresado && farmaceutico.getPassword().equals(PasswordIngresado)) {
                         System.out.println("-----------------------------");
                         System.out.println("LOGUEADO CORRECTAMENTE");
                         System.out.println("logueando...................");
