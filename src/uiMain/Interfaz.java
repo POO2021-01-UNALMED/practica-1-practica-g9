@@ -63,8 +63,9 @@ public class Interfaz {
         }
         System.out.print("Edad : ");
         int Edad = input.nextInt();
-        if (Edad < 18) {
+        if(Edad < 18){
             System.out.println("Edad invalida, explotacion infantil!");
+            return;
         }
 
         System.out.print("Contraseña : ");
