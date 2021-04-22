@@ -6,7 +6,7 @@ public class Cliente extends Persona {
 	public Cliente(String nombre, int edad, int documento, String direccion, int telefono) {
 		this.setNombre(nombre);
         this.setEdad(edad);
-        this.setDocumento(documento);
+        this.setdocumento(documento);
         this.direccion = direccion;
 		this.telefono = telefono;
 	}
