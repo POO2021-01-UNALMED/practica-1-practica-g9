@@ -1,15 +1,13 @@
 package gestorAplicacion;
 
-public class Empleado {
+public class Empleado extends Persona{
 	private String direccion;
 	private int telefono;
 	private String cargo;
 	
 	public Empleado(String nombre, int edad, int documento, String direccion, int telefono, 
 			String cargo){
-		this.setNombre(nombre);
-        this.setEdad(edad);
-        this.setDocumento(documento);
+		super(nombre, edad, documento);
         this.setcargo(cargo);
         this.direccion = direccion;
 		this.telefono = telefono;
@@ -22,14 +20,14 @@ public class Empleado {
 	}
 	public void setcargo(String cargo) {
 		this.cargo = cargo;
-	}	
+	}
+
 	public String getDireccion() {
 		return direccion;
 	}
 	public int getTelefono() {
 		return telefono;
 	}
-	
 	public String getcargo() {
 		return cargo;
 	}

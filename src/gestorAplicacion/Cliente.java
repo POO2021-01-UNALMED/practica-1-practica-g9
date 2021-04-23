@@ -4,9 +4,7 @@ public class Cliente extends Persona {
 	private String direccion;
 	private int telefono;
 	public Cliente(String nombre, int edad, int documento, String direccion, int telefono) {
-		this.setNombre(nombre);
-        this.setEdad(edad);
-        this.setdocumento(documento);
+		super(nombre,edad,documento);
         this.direccion = direccion;
 		this.telefono = telefono;
 	}
