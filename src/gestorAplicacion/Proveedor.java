@@ -4,12 +4,12 @@ public class Proveedor {
 	private int NIT;
 	private String nombreprov; // nombre proveedor
 	private int telefonoprov; // telefono del proveedor
-	private String Dirprov; //direccion del proveedor
+	private String dirprov; //direccion del proveedor
 	public Proveedor(int NIT, String nombre, int telefono, String direccion) {
 		this.NIT = NIT;
 		nombreprov = nombre;
 		telefonoprov = telefono;
-		Dirprov = direccion;
+		dirprov = direccion;
 	}
 
 	public void setNIT(int NIT) {
@@ -24,4 +24,18 @@ public class Proveedor {
 	public String getNombreprov() {
 		return nombreprov;
 	}
+	public void setTelefonoPROV(int telefono) {
+		telefonoprov = telefono;
+	}
+	public int getTelefonoprov() {
+		return telefonoprov;
+	}
+	public void setDirprov(String direccion) {
+		dirprov = direccion;
+	}
+	public String getDireccion() {
+		return dirprov;
+	}
+
+
 }
