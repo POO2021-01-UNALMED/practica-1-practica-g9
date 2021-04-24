@@ -63,7 +63,7 @@ public class Interfaz {
         }
         System.out.print("Edad : ");
         int Edad = input.nextInt();
-        if(Edad < 18){
+        if(Edad <= 18){
             System.out.println("Edad invalida, explotacion infantil!");
             return;
         }
@@ -123,7 +123,7 @@ public class Interfaz {
 
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
-            System.out.println("1. Metodo1");
+            System.out.println("1. Ventas");
             System.out.println("2. Metodo2");
             System.out.println("3. Metodo3");
             System.out.println("4. Metodo4");
@@ -132,8 +132,7 @@ public class Interfaz {
             option = input.next();
             switch (option) {
                 case "1":
-                    //administracion();
-
+                    //ventas();
 
                     break;
                 case "2":
