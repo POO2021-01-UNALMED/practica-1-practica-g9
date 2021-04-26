@@ -12,30 +12,31 @@ public class Proveedor {
 		dirprov = direccion;
 	}
 
-	public void setNIT(int NIT) {
-		this.NIT = NIT;
-	}
-	public int getNIT() {
-		return this.NIT;
-	}
-	public void setNombreProv(String nombre) {
-		nombreprov = nombre;
+	//Getters
+	public String getDireccion() {
+		return dirprov;
 	}
 	public String getNombreprov() {
 		return nombreprov;
 	}
-	public void setTelefonoPROV(int telefono) {
-		telefonoprov = telefono;
-	}
 	public int getTelefonoprov() {
 		return telefonoprov;
+	}
+	public int getNIT() {
+		return this.NIT;
+	}
+
+	//Setters
+	public void setNIT(int NIT) {
+		this.NIT = NIT;
+	}
+	public void setNombreProv(String nombre) {
+		nombreprov = nombre;
+	}
+	public void setTelefonoPROV(int telefono) {
+		telefonoprov = telefono;
 	}
 	public void setDirprov(String direccion) {
 		dirprov = direccion;
 	}
-	public String getDireccion() {
-		return dirprov;
-	}
-
-
 }

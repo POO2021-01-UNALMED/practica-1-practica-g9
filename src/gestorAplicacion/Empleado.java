@@ -12,16 +12,7 @@ public class Empleado extends Persona{
         this.direccion = direccion;
 		this.telefono = telefono;
 	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
-	public void setcargo(String cargo) {
-		this.cargo = cargo;
-	}
-
+	//Getters
 	public String getDireccion() {
 		return direccion;
 	}
@@ -31,6 +22,16 @@ public class Empleado extends Persona{
 	public String getcargo() {
 		return cargo;
 	}
-	
+
+	//Setters
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+	public void setcargo(String cargo) {
+		this.cargo = cargo;
+	}
 }
 

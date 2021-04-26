@@ -10,14 +10,23 @@ public class Persona {
         this.edad = edad;
         this.documento = documento;
     }
-
     public Persona(String nombre, int documento) {
         this.nombre=nombre;
         this.documento=documento;
     }
-    public Persona() {
+
+    //Getters
+    public int getDocumento(){
+        return documento;
+    }
+    public String getNombre(){
+        return nombre;
+    }
+    public int getEdad(){
+        return edad;
     }
 
+    //Setters
     public void setNombre(String nombre){
         this.nombre = nombre;
     }
@@ -28,14 +37,6 @@ public class Persona {
         this.documento = documento;
     }
 
-    public int getDocumento(){
-        return documento;
-    }
-    public String getNombre(){
-        return nombre;
-    }
-    public int getEdad(){
-        return edad;
-    }
+
 
 }

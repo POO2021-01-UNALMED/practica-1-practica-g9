@@ -43,7 +43,7 @@ public class Interfaz {
     }
 
     public static void registrarFarmaceutico() {
-
+        //Registro de documento farmaceutico
         System.out.print("Documento : ");
         int Documento = input.nextInt();
         input.nextLine();
@@ -52,22 +52,22 @@ public class Interfaz {
             System.out.print("Documento : ");
             Documento = input.nextInt();
         }
-
+        //Registro de nombre farmaceutico
         System.out.print("Nombre : ");
         String Nombre = input.nextLine();
         while (Nombre.equals("")) {
             System.out.println("Nombre invalido, ingreselo de nuevo ");
             System.out.print("Nombre : ");
             Nombre = input.nextLine();
-
         }
+        //Registro edad farmaceutico
         System.out.print("Edad : ");
         int Edad = input.nextInt();
         if(Edad <= 18){
             System.out.println("Edad invalida, explotacion infantil!");
             return;
         }
-
+        //Registro contraseña
         System.out.print("Contraseña : ");
         input.nextLine();
         String Password = input.nextLine();
@@ -76,11 +76,9 @@ public class Interfaz {
             System.out.print("Contraseña: ");
             Password = input.nextLine();
         }
-
+        //Creacion del objeto farmaceutico
         Farmaceutico nuevoFarmaceutico = new Farmaceutico(Nombre, Edad, Documento, Password);
         farmaceuticos.add(nuevoFarmaceutico);
-
-
         System.out.println("FARMACEUTICO REGISTRADO EXITOSAMENTE");
         ingresarFarmaceutico();
     }
@@ -91,6 +89,7 @@ public class Interfaz {
             System.out.println("Registre un Farmaceutico :");
             registrarFarmaceutico();
         }
+        //Verificacion de documento y contraseña del farmaceutico
         System.out.println("-----------------------------");
         System.out.println("Ingresar Documento");
         System.out.println("-----------------------------");
@@ -100,7 +99,6 @@ public class Interfaz {
         System.out.println("-----------------------------");
         input.nextLine();
         String PasswordIngresado = input.nextLine();
-
         for (Farmaceutico farmaceutico : farmaceuticos) {
             if (farmaceutico.getDocumento() == DocumentoIngresado && farmaceutico.getPassword().equals(PasswordIngresado)) {
                         System.out.println("-----------------------------");
@@ -113,21 +111,14 @@ public class Interfaz {
                 }
             }
 
-    private static void menuPrincipal() {
+    public static void menuPrincipal() {
         String option;
-
         System.out.println("Bienvenido " + farmaceuticoLogueado.getNombre());
-
         label:
         while (true) {
-
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
-
-            System.out.println("1. Ventas");
-
             System.out.println("1. Vender");
-
             System.out.println("2. Metodo2");
             System.out.println("3. Metodo3");
             System.out.println("4. Metodo4");
@@ -136,44 +127,33 @@ public class Interfaz {
             option = input.next();
             switch (option) {
                 case "1":
-
                     //ventas();
-
                     Vender();
-
                     break;
                 case "2":
                     //busqueda();
-
-
                     break;
                 case "3":
                     //diagnostico();
-
-
                     break;
                 case "4":
                     //guardar();
-
-
                     break;
                 case "0":
                     salirCancelar();
                     break label;
-
                 }
             }
         }
+
     private static void salirCancelar() {
         while(true){
             System.out.println("Si sale ahora se perderan los cambios sin guardar");
             System.out.println("Ingrese [N] si desea regresar al  menu principal");
             System.out.println("Ingrese [Y] si desea cerrar el programa");
             String cerrado = input.next();
-
             if (cerrado.equals("N")||cerrado.equals("n")) {
                 System.out.println("Regresando al menu principal");
-
                 return;
             }
             else if (cerrado.equals("Y")||cerrado.equals("y")) {
@@ -183,7 +163,6 @@ public class Interfaz {
             } else {
                 System.out.println("Opcion invalida");
                 System.out.println("-----------------------------");
-
             }
         }
     }
