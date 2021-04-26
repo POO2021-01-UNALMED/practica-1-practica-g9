@@ -1,12 +1,16 @@
 package uiMain;
+import gestorAplicacion.Bodega;
 import gestorAplicacion.Farmaceutico;
+
 import java.util.LinkedList;
 import java.util.Scanner;
+
 import static gestorAplicacion.Venta.Vender;
 
 public class Interfaz {
     public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null,0,0,null);
     public static LinkedList<Farmaceutico> farmaceuticos = new LinkedList<>();
+    public static LinkedList<Bodega> bodegas = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -64,7 +68,7 @@ public class Interfaz {
         System.out.print("Edad : ");
         int Edad = input.nextInt();
         if(Edad <= 18){
-            System.out.println("Edad invalida, explotacion infantil!");
+            System.out.println("Edad invalida");
             return;
         }
         //Registro contraseña
@@ -119,7 +123,7 @@ public class Interfaz {
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
             System.out.println("1. Vender");
-            System.out.println("2. Metodo2");
+            System.out.println("2. Inventario");
             System.out.println("3. Metodo3");
             System.out.println("4. Metodo4");
             System.out.println("0. Salir y cancelar");
@@ -131,7 +135,8 @@ public class Interfaz {
                     Vender();
                     break;
                 case "2":
-                    //busqueda();
+                    //Inventaro();
+                    Inventario();
                     break;
                 case "3":
                     //diagnostico();
@@ -145,6 +150,99 @@ public class Interfaz {
                 }
             }
         }
+    public static void Inventario(){
+        System.out.println("Ingresando al Inventario, escoja una opcion: ");
+        System.out.println("-----------------------------");
+        System.out.println("Escoja una opcion:");
+        System.out.println("1. Revisar inventario");
+        System.out.println("2. Recibir mercancia");
+        System.out.println("3. Registrar nueva bodega");
+        System.out.println("0. Salir");
+        System.out.println("-----------------------------");
+        String option = input.next();
+        switch (option) {
+            case "1" ->
+                    //Revisar inventario();
+                    RevisarInventario();
+            case "2" ->
+                    //Recibir mercancia();
+                    RecibirMercancia();
+            case "3" ->
+                    //Registrar nueva Bodega();
+                    RegistrarBodega();
+        }
+        }
+    public static void RevisarInventario(){
+        System.out.println("Escoja una opcion: ");
+        System.out.println("-----------------------------");
+        System.out.println("Escoja una opcion:");
+        System.out.println("1. Busqueda por bodega");
+        System.out.println("2. Busqueda total");
+        System.out.println("0. Salir");
+        System.out.println("-----------------------------");
+        String option = input.next();
+        switch (option) {
+            case "1" ->
+                    //Busqueda por bodega;
+                    BusquedaBodega();
+            case "2" ->
+                    //Busqueda total;
+                    BusquedaTotal();
+                    }
+                }
+    public static void BusquedaBodega() {
+        if (bodegas.isEmpty()) {
+            System.out.println("No hay bodegas registradas");
+        } else {
+            System.out.println("Ingrese la ubicacion de la bodega: ");
+            input.nextLine();
+            String direccion = input.nextLine();
+            for (Bodega bodega : bodegas) {
+                if (bodega.getUbicacion().equals(direccion)) {
+                    System.out.println(bodega);
+                }
+            }
+        }
+    }
+    public static void BusquedaTotal() {
+        if (bodegas.isEmpty()) {
+            System.out.println("No hay bodegas registradas");
+        } else {
+            for (Bodega bodega : bodegas) {
+                    System.out.println(bodega);
+                }
+            }
+        }
+
+    public static void RecibirMercancia(){
+        if(bodegas.isEmpty()){
+            System.out.println("No hay bodegas registradas");
+        } else {
+            System.out.println("Ingrese la direccion de la bodega que recibira la mercancia");
+            String direccion = input.nextLine();
+            //Un for vacio, funcionalidad de recibir mercancia aun incompleto!!!
+            /*
+            for(Bodega bodega : bodegas){
+                if(bodega.getUbicacion().equals(direccion)){
+                    System.out.println("");
+                } else {
+                    System.out.println("No se encuentra la bodega con la direccion: " + direccion);
+                }
+            }*/
+        }
+    }
+
+    public static void RegistrarBodega(){
+        System.out.println("Registro de bodega");
+        System.out.println("Ingrese la ubicacion de la bodega: ");
+        String direccion = input.nextLine();
+        while (direccion.isEmpty()){
+            direccion = input.nextLine();
+        }
+        Bodega bodega = new Bodega(direccion);
+        bodegas.add(bodega);
+        System.out.println("Bodega registrada con exito!");
+    }
 
     private static void salirCancelar() {
         while(true){

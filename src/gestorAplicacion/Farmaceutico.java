@@ -8,10 +8,12 @@ public class Farmaceutico extends Persona{
         this.password = password;
     }
 
+    //Getters
     public String getPassword(){
         return password;
     }
 
+    //Setters
     public void setPassword(String password){
         this.password = password;
     }

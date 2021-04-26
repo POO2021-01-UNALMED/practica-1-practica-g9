@@ -5,11 +5,24 @@ public class Vehiculo {
         private String Modelo;
         private Empleado Encargado;
 
-        public Vehiculo() {
-            this.Encargado = Encargado;
-            this.Placa = Placa;
-            this.Modelo = Modelo;
+        public Vehiculo(String placa, String modelo, Empleado empleado) {
+            this.Placa = placa;
+            this.Modelo = modelo;
+            this.Encargado = empleado;
         }
+
+        //Getters
+        public String getPlaca() {
+            return Placa;
+        }
+        public String getModelo() {
+        return Modelo;
+    }
+        public Empleado getEncargado() {
+        return Encargado;
+    }
+
+        //Setters
         public void setPlaca(String placa) {
             this.Placa = placa;
         }
@@ -19,15 +32,4 @@ public class Vehiculo {
         public void setEncargado(Empleado Encargado) {
             this.Encargado = Encargado;
         }
-
-        public String getPlaca() {
-            return Placa;
-        }
-        public String getModelo() {
-            return Modelo;
-        }
-        public Empleado getEncargado() {
-            return Encargado;
-        }
-
     }

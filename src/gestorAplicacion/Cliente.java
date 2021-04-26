@@ -3,8 +3,6 @@ package gestorAplicacion;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import static gestorAplicacion.Venta.Vender;
-
 
 public class Cliente extends Persona {
 	public static LinkedList<Cliente> clientes = new LinkedList<>();
@@ -20,12 +18,7 @@ public class Cliente extends Persona {
 		super(nombre,documento);
 
 	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+	//Getters
 	public String getDireccion() {
 		return direccion;
 	}
@@ -33,14 +26,18 @@ public class Cliente extends Persona {
 		return telefono;
 	}
 
-
+	//Setters
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
 
 	public static void registrarCliente() {
-
 		System.out.print("Documento : ");
 		int Documento = input.nextInt();
 		input.nextLine();
-
 		while (Documento <= 0) {
 			System.out.println("Documento invalido ,ingreselo de nuevo ");
 			System.out.print("Documento : ");
@@ -53,17 +50,10 @@ public class Cliente extends Persona {
 			System.out.println("Nombre invalido, ingreselo de nuevo ");
 			System.out.print("Nombre : ");
 			Nombre = input.nextLine();
-
 		}
-
 
 		Cliente nuevoCliente = new Cliente(Nombre,Documento);
 		clientes.add(nuevoCliente);
 		System.out.println("ClIENTE REGISTRADO EXITOSAMENTE");
-		Vender();
-
-
-
-
 	}
 }
