@@ -44,4 +44,8 @@ public class Medicamento {
 	public String getNombre() {
 		return nombre;
 	}
+
+	public String toString(){
+		return "Codigo: "+ this.codigo+"	Nombre:"+this.nombre+"		Cantidad:"+this.cant;
+	}
 }

@@ -10,12 +10,15 @@ public class Venta {
     private Cliente cliente;
     Farmaceutico farmaceutico;
     public static LinkedList<String> drogas = new LinkedList<>();
+    public static LinkedList<Integer> cantidades = new LinkedList<>(); //lista paralela con las cantidades de cada producto
+    Iterator it = linkedlist.iterator();
     private int precioTotal;
 
-    public Venta(Cliente cliente, Farmaceutico farmaceutico, LinkedList<String> drogas) {
+    public Venta(Cliente cliente, Farmaceutico farmaceutico, LinkedList<String> drogas, LinkedList<Integer> cantidades) {
         this.cliente = cliente;
         this.farmaceutico = farmaceutico;
         Venta.drogas = drogas;
+        Venta.cantidades = cantidades;
     }
 
     //Getters
@@ -65,23 +68,69 @@ public class Venta {
                     String option = input.next();
                     System.out.println("Cantidad del producto");
                     int cantidad = input.nextInt();
+                    cantidades.add(cantidad);
                     drogas.add(option);
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
                     String option2 = input.next();
-                    while((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
+                    while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
                         System.out.println("que desea comprar?");
                         option = input.next();
                         drogas.add(option);
                         System.out.println("desea algo mas?");
                         System.out.println("(escriba si o no)");
                         option2 = input.next();
-                        }
                     }
                 }
             }
         }
+
     }
+
+    public void VentaPorMayor() {
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes registrados!");
+            System.out.println("Registre un Cliente :");
+            registrarCliente();
+        } else {
+            System.out.println("Documento Del cliente =");
+            int DocumentoCliente = input.nextInt();
+            for (Cliente cliente : clientes) {
+                if (cliente.getDocumento() == DocumentoCliente) {
+                    System.out.println("que desea comprar?");
+                    String option = input.next();
+                    System.out.println("¿Cantidad del producto que desea llevar?");
+                    int cantidad = input.nextInt();
+                    drogas.add(option);
+                    System.out.println("desea algo mas?");
+                    System.out.println("(escriba si o no)");
+                    String option2 = input.next();
+                    while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
+                        System.out.println("que desea comprar?");
+                        option = input.next();
+                        drogas.add(option);
+                        System.out.println("desea algo mas?");
+                        System.out.println("(escriba si o no)");
+                        option2 = input.next();
+                    }
+                    ResumenVenta(drogas, cantidades);
+                    System.out.println("Su pedido se enviará a la siguiente dirección: " +
+                            cliente.getDireccion());
+
+                }
+            }
+
+        }
+    }
+
+    void ResumenVenta(LinkedList Drogas, LinkedList Cantidades) {
+        while (drogas.it.hasNext() && cantidades.it.hasNext()) {
+            return drogas.it.next() + "   " + cantidades.it.next();
+        }
+
+    }
+}
+
 
 
 

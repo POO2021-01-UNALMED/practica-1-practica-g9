@@ -14,8 +14,9 @@ public class Cliente extends Persona {
         this.direccion = direccion;
 		this.telefono = telefono;
 	}
-	public Cliente(String nombre, int documento) {
+	public Cliente(String nombre, int documento, String direccion) {
 		super(nombre,documento);
+		this.direccion=direccion;
 
 	}
 	//Getters
@@ -51,8 +52,15 @@ public class Cliente extends Persona {
 			System.out.print("Nombre : ");
 			Nombre = input.nextLine();
 		}
+		System.out.print("Direccion : ");
+		String direccion = input.nextLine();
+		while (direccion.equals("")) {
+			System.out.println("Dirección invalida, ingresela de nuevo. ");
+			System.out.print("Dirección : ");
+			direccion = input.nextLine();
+		}
 
-		Cliente nuevoCliente = new Cliente(Nombre,Documento);
+		Cliente nuevoCliente = new Cliente(Nombre,Documento,direccion);
 		clientes.add(nuevoCliente);
 		System.out.println("ClIENTE REGISTRADO EXITOSAMENTE");
 	}
