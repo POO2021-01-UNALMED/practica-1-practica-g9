@@ -1,8 +1,8 @@
 package uiMain;
 import gestorAplicacion.Farmaceutico;
-
 import java.util.LinkedList;
 import java.util.Scanner;
+import static gestorAplicacion.Venta.Vender;
 
 public class Interfaz {
     public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null,0,0,null);
@@ -123,7 +123,11 @@ public class Interfaz {
 
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
+<<<<<<< Updated upstream
             System.out.println("1. Ventas");
+=======
+            System.out.println("1. Vender");
+>>>>>>> Stashed changes
             System.out.println("2. Metodo2");
             System.out.println("3. Metodo3");
             System.out.println("4. Metodo4");
@@ -132,7 +136,12 @@ public class Interfaz {
             option = input.next();
             switch (option) {
                 case "1":
+<<<<<<< Updated upstream
                     //ventas();
+=======
+                    Vender();
+
+>>>>>>> Stashed changes
 
                     break;
                 case "2":

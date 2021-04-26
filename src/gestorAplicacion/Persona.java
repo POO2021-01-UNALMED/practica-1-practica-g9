@@ -11,6 +11,10 @@ public class Persona {
         this.documento = documento;
     }
 
+    public Persona(String nombre, int documento) {
+        this.nombre=nombre;
+        this.documento=documento;
+    }
     public Persona() {
     }
 
