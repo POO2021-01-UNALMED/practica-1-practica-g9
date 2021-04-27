@@ -46,6 +46,6 @@ public class Medicamento {
 	}
 
 	public String toString(){
-		return "Codigo: "+ this.codigo+"	Nombre:"+this.nombre+"		Cantidad:"+this.cant;
+		return "Codigo: "+ this.codigo+"	Nombre:"+this.nombre+"		Cantidad en el inventario:"+this.cant;
 	}
 }

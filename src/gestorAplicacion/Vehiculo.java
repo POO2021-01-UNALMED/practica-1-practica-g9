@@ -43,7 +43,8 @@ public class Vehiculo {
             }
 
 
-        public void entrega(String direccion, LinkedList medicamentos, Vehiculo vehiculo){
+        public void entrega(String direccion, LinkedList medicamentos, LinkedList cantidades, String vehiculo){
+
 
         }
     }

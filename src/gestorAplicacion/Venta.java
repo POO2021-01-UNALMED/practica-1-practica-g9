@@ -1,4 +1,5 @@
 package gestorAplicacion;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 import static gestorAplicacion.Cliente.clientes;
@@ -11,7 +12,7 @@ public class Venta {
     Farmaceutico farmaceutico;
     public static LinkedList<String> drogas = new LinkedList<>();
     public static LinkedList<Integer> cantidades = new LinkedList<>(); //lista paralela con las cantidades de cada producto
-    Iterator it = linkedlist.iterator();
+
     private int precioTotal;
 
     public Venta(Cliente cliente, Farmaceutico farmaceutico, LinkedList<String> drogas, LinkedList<Integer> cantidades) {
@@ -101,6 +102,7 @@ public class Venta {
                     String option = input.next();
                     System.out.println("¿Cantidad del producto que desea llevar?");
                     int cantidad = input.nextInt();
+                    cantidades.add(cantidad);
                     drogas.add(option);
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
@@ -116,6 +118,7 @@ public class Venta {
                     ResumenVenta(drogas, cantidades);
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
+                    //entrega(cliente.getDireccion(), drogas, cantidades, vehiculo.placa);
 
                 }
             }
@@ -123,11 +126,13 @@ public class Venta {
         }
     }
 
-    void ResumenVenta(LinkedList Drogas, LinkedList Cantidades) {
-        while (drogas.it.hasNext() && cantidades.it.hasNext()) {
-            return drogas.it.next() + "   " + cantidades.it.next();
+    String ResumenVenta(LinkedList drogas, LinkedList cantidades) {
+        Iterator it = drogas.iterator();
+        Iterator ite = cantidades.iterator();
+        while(it.hasNext() && ite.hasNext()){
+            return it.next()+" "+ite.next();
         }
-
+        return null;
     }
 }
 
