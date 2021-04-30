@@ -24,7 +24,7 @@ public class Interfaz {
             System.out.println("Bienvenido ");
             System.out.println("Escoja una opcion:");
             System.out.println("1. Ingresar farmaceutico");
-            System.out.println("2. Registrar usuario");
+            System.out.println("2. Registrar farmaceutico");
             System.out.println("0. Salir");
             System.out.println("-----------------------------");
             System.out.println();

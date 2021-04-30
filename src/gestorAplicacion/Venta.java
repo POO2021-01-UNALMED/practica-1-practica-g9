@@ -10,16 +10,17 @@ public class Venta {
     public static Scanner input = new Scanner(System.in);
     private Cliente cliente;
     Farmaceutico farmaceutico;
-    public static LinkedList<String> drogas = new LinkedList<>();
+    public static LinkedList<String> drogasDetal = new LinkedList<>();
+    public static LinkedList<Integer> drogasMayor = new LinkedList<>();
     public static LinkedList<Integer> cantidades = new LinkedList<>(); //lista paralela con las cantidades de cada producto
+
+
 
     private int precioTotal;
 
-    public Venta(Cliente cliente, Farmaceutico farmaceutico, LinkedList<String> drogas, LinkedList<Integer> cantidades) {
+    public Venta(Cliente cliente, Farmaceutico farmaceutico) {
         this.cliente = cliente;
         this.farmaceutico = farmaceutico;
-        Venta.drogas = drogas;
-        Venta.cantidades = cantidades;
     }
 
     //Getters
@@ -48,7 +49,7 @@ public class Venta {
                     break;
 
                 case "2":
-                    //VentaMayor();
+                    VentaMayor();
                     break;
             }
             break;
@@ -70,14 +71,17 @@ public class Venta {
                     System.out.println("Cantidad del producto");
                     int cantidad = input.nextInt();
                     cantidades.add(cantidad);
-                    drogas.add(option);
+                    drogasDetal.add(option);
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
                     String option2 = input.next();
                     while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
                         System.out.println("que desea comprar?");
                         option = input.next();
-                        drogas.add(option);
+                        drogasDetal.add(option);
+                        System.out.println("¿Cantidad del producto que desea llevar?");
+                        cantidad = input.nextInt();
+                        cantidades.add(cantidad);
                         System.out.println("desea algo mas?");
                         System.out.println("(escriba si o no)");
                         option2 = input.next();
@@ -88,7 +92,7 @@ public class Venta {
 
     }
 
-    public void VentaPorMayor() {
+    public static void VentaMayor() {
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados!");
             System.out.println("Registre un Cliente :");
@@ -99,23 +103,27 @@ public class Venta {
             for (Cliente cliente : clientes) {
                 if (cliente.getDocumento() == DocumentoCliente) {
                     System.out.println("que desea comprar?");
-                    String option = input.next();
+                    int option = input.nextInt();
                     System.out.println("¿Cantidad del producto que desea llevar?");
                     int cantidad = input.nextInt();
+
                     cantidades.add(cantidad);
-                    drogas.add(option);
+                    drogasMayor.add(option);
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
                     String option2 = input.next();
                     while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
                         System.out.println("que desea comprar?");
-                        option = input.next();
-                        drogas.add(option);
+                        option = input.nextInt();
+                        drogasMayor.add(option);
+                        System.out.println("¿Cantidad del producto que desea llevar?");
+                        cantidad = input.nextInt();
+                        cantidades.add(cantidad);
                         System.out.println("desea algo mas?");
                         System.out.println("(escriba si o no)");
                         option2 = input.next();
                     }
-                    ResumenVenta(drogas, cantidades);
+                    ResumenVenta(drogasMayor, cantidades);
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
                     //entrega(cliente.getDireccion(), drogas, cantidades, vehiculo.placa);
@@ -124,9 +132,11 @@ public class Venta {
             }
 
         }
+        System.out.println(cantidades);
+        System.out.println(drogasMayor);
     }
 
-    String ResumenVenta(LinkedList drogas, LinkedList cantidades) {
+    public static String ResumenVenta(LinkedList drogas, LinkedList cantidades) {
         Iterator it = drogas.iterator();
         Iterator ite = cantidades.iterator();
         while(it.hasNext() && ite.hasNext()){
@@ -135,6 +145,7 @@ public class Venta {
         return null;
     }
 }
+
 
 
 
