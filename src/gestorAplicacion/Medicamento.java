@@ -14,6 +14,11 @@ public class Medicamento {
 		this.cant = cant;
 	}
 
+	public Medicamento(int codigo, int cant){
+		this.codigo = codigo;
+		this.cant = cant;
+	}
+
 	//Setters
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -45,6 +50,7 @@ public class Medicamento {
 		return nombre;
 	}
 
+	@Override
 	public String toString(){
 		return "Codigo: "+ this.codigo+"	Nombre:"+this.nombre+"		Cantidad en el inventario:"+this.cant;
 	}

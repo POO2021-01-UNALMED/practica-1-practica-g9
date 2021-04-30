@@ -43,14 +43,14 @@ public class Bodega {
     public int cantidadTotalMedicamento(){
         int MedicamentoN = 0;
         int MedicamentoE = 0;
-        if(neveras.size() == 0){
+        if(neveras.isEmpty()){
             MedicamentoN += 0;
         } else {
             for (Nevera nevera : neveras) {
                 MedicamentoN += nevera.cantidadMedicamento();
             }
         }
-        if(estanterias.size() == 0){
+        if(estanterias.isEmpty()){
             MedicamentoE += 0;
         } else {
             for (Estanterias estanteria : estanterias) {
@@ -66,6 +66,7 @@ public class Bodega {
         estanterias.add(estanteria);
         }
 
+        //Solucionar cantidad total de medicamento
     @Override
     public String toString(){
        return "Ubicacion: " + getUbicacion() + "\n" +
