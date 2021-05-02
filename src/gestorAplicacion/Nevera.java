@@ -20,20 +20,14 @@ public class Nevera {
         return codigo;
     }
     public int cantidadMedicamento() {
-        int cantidad = 0;
-        if (medicamentos.isEmpty()) {
-            return 0;
-        } else {
-            for (Medicamento medicamento : medicamentos) {
-                cantidad += medicamento.getCantidad();
-            }
-            return cantidad;
-        }
+        return 100 - capacidad;
     }
+
     public void agregarMedicamento(Medicamento medicamento){
         if(this.getCapacidad() >= medicamento.getCantidad()) {
             medicamentos.add(medicamento);
             this.capacidad -= medicamento.getCantidad();
+            medicamento.setcant(0);
         } else {
             int aux;
             if(this.getCapacidad() > 0){

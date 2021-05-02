@@ -68,10 +68,12 @@ public class Bodega {
         for(Nevera nevera1 : neveras){
             if(nevera1.getCapacidad() > 0){
                 nevera1.agregarMedicamento(medicamento);
-            } else {
-                Nevera nevera2 = new Nevera();
-                neveras.add(nevera2);
+                }
             }
+        if(neveras.getLast().getCapacidad() == 0){
+            Nevera nevera = new Nevera();
+            neveras.add(nevera);
+            repartirNeveras(medicamento);
         }
     }
 

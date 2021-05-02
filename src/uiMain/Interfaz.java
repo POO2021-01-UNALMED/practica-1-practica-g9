@@ -220,7 +220,6 @@ public class Interfaz {
         }
 
     public static void RecibirMercancia() {
-        //Modificar para que reciba mas de un medicamento
         if (proveedores.isEmpty()) {
             System.out.println("Registre un proveedor!");
             RegistrarProveedor();
@@ -247,7 +246,6 @@ public class Interfaz {
                         break;
                     }
                 }
-                AdministrarMedicamento();
                 if (medicamentosTotales.isEmpty()) {
                     medicamentosTotales.addAll(recepciones);
                 } else {
@@ -263,6 +261,7 @@ public class Interfaz {
                         medicamentosTotales.addAll(recepciones);
                     }
                 }
+                AdministrarMedicamento();
                 recepciones.clear();
             }
         }
