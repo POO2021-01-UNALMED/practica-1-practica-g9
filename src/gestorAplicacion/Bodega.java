@@ -59,9 +59,22 @@ public class Bodega {
         }
         return MedicamentoE + MedicamentoN;
     }
-    public void agregarNevera(Nevera nevera){
-        neveras.add(nevera);
+
+    public void repartirNeveras(Medicamento medicamento){
+        if(neveras.isEmpty()){
+            Nevera nevera = new Nevera();
+            neveras.add(nevera);
+        }
+        for(Nevera nevera1 : neveras){
+            if(nevera1.getCapacidad() > 0){
+                nevera1.agregarMedicamento(medicamento);
+            } else {
+                Nevera nevera2 = new Nevera();
+                neveras.add(nevera2);
+            }
+        }
     }
+
     public void agregarEstanteria(Estanterias estanteria){
         estanterias.add(estanteria);
         }

@@ -14,11 +14,6 @@ public class Medicamento {
 		this.cant = cant;
 	}
 
-	public Medicamento(int codigo, int cant){
-		this.codigo = codigo;
-		this.cant = cant;
-	}
-
 	//Setters
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
