@@ -37,6 +37,9 @@ public class Nevera {
             }
         }
     }
+    public LinkedList<Medicamento> recorrerMedicamentos(){
+        return medicamentos;
+    }
 
     //Setters
     public void setCapacidad(int capacidad){

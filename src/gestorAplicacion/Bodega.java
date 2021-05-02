@@ -76,6 +76,9 @@ public class Bodega {
             repartirNeveras(medicamento);
         }
     }
+    public LinkedList<Nevera> recorrerNeveras(){
+        return neveras;
+    }
 
     public void agregarEstanteria(Estanterias estanteria){
         estanterias.add(estanteria);

@@ -304,7 +304,7 @@ public class Interfaz {
         System.out.println("Ingrese nombre de proveedor: ");
         String nombre = input.next();
         System.out.println("Ingrese telefono de proveedor: ");
-        int telefono = input.nextInt();
+        long telefono = input.nextLong();
         System.out.println("Ingrese direccion de proveedor: ");
         input.nextLine();
         String direccion = input.nextLine();

@@ -3,9 +3,9 @@ package gestorAplicacion;
 public class Proveedor {
 	private int NIT;
 	private String nombreprov; // nombre proveedor
-	private int telefonoprov; // telefono del proveedor
+	private long telefonoprov; // telefono del proveedor
 	private String dirprov; //direccion del proveedor
-	public Proveedor(int NIT, String nombre, int telefono, String direccion) {
+	public Proveedor(int NIT, String nombre, long telefono, String direccion) {
 		this.NIT = NIT;
 		nombreprov = nombre;
 		telefonoprov = telefono;
@@ -19,7 +19,7 @@ public class Proveedor {
 	public String getNombreprov() {
 		return nombreprov;
 	}
-	public int getTelefonoprov() {
+	public long getTelefonoprov() {
 		return telefonoprov;
 	}
 	public int getNIT() {

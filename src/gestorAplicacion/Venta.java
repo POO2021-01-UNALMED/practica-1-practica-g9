@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import static gestorAplicacion.Cliente.clientes;
 import static gestorAplicacion.Cliente.registrarCliente;
+import static uiMain.Interfaz.bodegas;
 
 public class Venta {
     public static LinkedList<Venta> ventas = new LinkedList<>();
@@ -89,7 +90,30 @@ public class Venta {
                 }
             }
         }
+        System.out.println("ingrese direccion de la bodega");
+        input.nextLine();
+        String direccion = input.nextLine();
+// esto de aqui abajo esta en via de desarrollo porque no funciona (imprime 900 cosas) , no lo usen aun , pls UwU
+        for (Bodega bodega1 : bodegas) {
+            if (bodega1.getUbicacion().equals(direccion)) {
+                for(Nevera nevera1: bodega1.recorrerNeveras()){
+                    for(Medicamento medicamento1: nevera1.recorrerMedicamentos()){
+                        for(String string1:drogasDetal ){
+                            for(int int1: cantidades){
+                                if(medicamento1.getNombre().contains(string1)){
+                                    System.out.println("si hay disponibilidad");
+                                }
+                                else{
+                                    System.out.println("no hay disponibilidad");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
+
+        }
     }
 
     public static void VentaMayor() {
@@ -145,6 +169,7 @@ public class Venta {
         return null;
     }
 }
+
 
 
 
