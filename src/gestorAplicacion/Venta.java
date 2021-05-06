@@ -1,19 +1,12 @@
 package gestorAplicacion;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
-import static gestorAplicacion.Cliente.clientes;
-import static gestorAplicacion.Cliente.registrarCliente;
-import static uiMain.Interfaz.bodegas;
 
 public class Venta {
     public static LinkedList<Venta> ventas = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
     private Cliente cliente;
     Farmaceutico farmaceutico;
-
-
-
     private int precioTotal;
 
     public Venta(Cliente cliente, Farmaceutico farmaceutico) {

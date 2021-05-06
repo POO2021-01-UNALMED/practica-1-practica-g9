@@ -19,6 +19,7 @@ public class Interfaz {
     public static Scanner input = new Scanner(System.in);
     public static LinkedList<String> drogasDetal = new LinkedList<>();
     public static LinkedList<Integer> drogasMayor = new LinkedList<>();
+    public static LinkedList<Pedido> pedidos = new LinkedList<>();
     public static LinkedList<Integer> cantidades = new LinkedList<>(); //lista paralela con las cantidades de cada producto
 
 
@@ -373,8 +374,8 @@ public class Interfaz {
                     String option = input.next();
                     System.out.println("Cantidad del producto");
                     int cantidad = input.nextInt();
-                    cantidades.add(cantidad);
-                    drogasDetal.add(option);
+                    Pedido pedido = new Pedido(option, cantidad);
+                    pedidos.add(pedido);
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
                     String option2 = input.next();
@@ -384,7 +385,7 @@ public class Interfaz {
                         drogasDetal.add(option);
                         System.out.println("¿Cantidad del producto que desea llevar?");
                         cantidad = input.nextInt();
-                        cantidades.add(cantidad);
+                        Pedido pedido1 = new Pedido(option, cantidad);
                         System.out.println("desea algo mas?");
                         System.out.println("(escriba si o no)");
                         option2 = input.next();
@@ -398,12 +399,15 @@ public class Interfaz {
 // esto de aqui abajo esta en via de desarrollo porque no funciona (imprime 900 cosas) , no lo usen aun , pls UwU
         for (Bodega bodega1 : bodegas) {
             if (bodega1.getUbicacion().equals(direccion)) {
+                System.out.println(bodega1.getUbicacion());
                 for(Nevera nevera1: bodega1.recorrerNeveras()){
+                    System.out.println(nevera1);
                     for(Medicamento medicamento1: nevera1.recorrerMedicamentos()){
-                        for(String string1:drogasDetal ){
-                            if(medicamento1.getNombre().contains(string1)){
-                                //verificar cantidad
-                                //si si mostrar que si disponibilidad
+                        System.out.println(medicamento1);
+                        for(Pedido pedido : pedidos){
+                            if(medicamento1.getNombre().equals(pedido.getNombreM()) && medicamento1.getCantidad() >= pedido.getCantidadM()){
+                                System.out.println("Si hay disponibilidad");
+                                break;
                             }
                             else{
                                 System.out.println("no hay disponibilidad");
@@ -456,7 +460,6 @@ public class Interfaz {
 
                 }
             }
-
         }
         System.out.println(cantidades);
         System.out.println(drogasMayor);
