@@ -13,11 +13,9 @@ public class Interfaz {
     public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null,0,0,null);
     public static LinkedList<Farmaceutico> farmaceuticos = new LinkedList<>();
     public static LinkedList<Proveedor> proveedores = new LinkedList<>();
-    public static LinkedList<Bodega> bodegas = new LinkedList<>();
+    public static LinkedList<Nevera> neveras = new LinkedList<>();
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
-    public static LinkedList<Medicamento> recepciones = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
-    public static LinkedList<String> drogasDetal = new LinkedList<>();
     public static LinkedList<Integer> drogasMayor = new LinkedList<>();
     public static LinkedList<Pedido> pedidos = new LinkedList<>();
     public static LinkedList<Integer> cantidades = new LinkedList<>(); //lista paralela con las cantidades de cada producto
@@ -167,7 +165,6 @@ public class Interfaz {
         System.out.println("Escoja una opcion:");
         System.out.println("1. Revisar inventario");
         System.out.println("2. Recibir mercancia");
-        System.out.println("3. Registrar nueva bodega");
         System.out.println("0. Salir");
         System.out.println("-----------------------------");
         String option = input.next();
@@ -178,11 +175,8 @@ public class Interfaz {
             case "2" ->
                     //Recibir mercancia();
                     RecibirMercancia();
-            case "3" ->
-                    //Registrar nueva Bodega();
-                    RegistrarBodega();
-            }
         }
+    }
     public static void RevisarInventario(){
         System.out.println("Escoja una opcion: ");
         System.out.println("-----------------------------");
@@ -195,36 +189,34 @@ public class Interfaz {
         switch (option) {
             case "1" ->
                     //Busqueda por bodega;
-                    BusquedaBodega();
+                    BusquedaNevera();
             case "2" ->
                     //Busqueda total;
                     BusquedaTotal();
                     }
                 }
-    public static void BusquedaBodega() {
-        if (bodegas.isEmpty()) {
-            System.out.println("No hay bodegas registradas");
+    public static void BusquedaNevera() {
+        if (neveras.isEmpty()) {
+            System.out.println("No hay neveras registradas");
         } else {
-            System.out.println("Ingrese la ubicacion de la bodega: ");
+            System.out.println("Ingrese el codigo de la nevera: ");
             input.nextLine();
-            String direccion = input.nextLine();
-            for (Bodega bodega : bodegas) {
-                if (bodega.getUbicacion().equals(direccion)) {
-                    System.out.println(bodega);
+            int codigo = input.nextInt();
+            for (Nevera nevera : neveras) {
+                if (codigo == nevera.getCodigo()) {
+                    System.out.println(nevera);
                 }
             }
         }
     }
     public static void BusquedaTotal() {
-        if (bodegas.isEmpty()) {
-            System.out.println("No hay bodegas registradas");
+        if (neveras.isEmpty()) {
+            System.out.println("No hay neveras registradas");
         } else {
-            for (Bodega bodega : bodegas) {
-                    System.out.println(bodega);
+            for (Nevera nevera : neveras) {
+                    System.out.println(nevera);
                 }
             System.out.println(medicamentosTotales);
-            System.out.println("Recepcion: ");
-            System.out.println(recepciones);
             }
         }
 
@@ -246,7 +238,7 @@ public class Interfaz {
                     int codigo = input.nextInt();
                     System.out.println("Ingrese cantidad de medicamento: ");
                     int cantidad = input.nextInt();
-                    recepciones.add(new Medicamento(codigo, nombre, proveedor, metSuministro, cantidad));
+                    medicamentosTotales.add(new Medicamento(codigo, nombre, proveedor, metSuministro, cantidad));
                     System.out.println("Desea solicitar otro medicamento?: ");
                     System.out.println("1. si");
                     System.out.println("2. no");
@@ -255,57 +247,31 @@ public class Interfaz {
                         break;
                     }
                 }
-                if (medicamentosTotales.isEmpty()) {
-                    medicamentosTotales.addAll(recepciones);
-                } else {
-                    for (Medicamento recepcion : recepciones) {
-                        for (Medicamento medicamento : medicamentosTotales) {
-                            if (recepcion.getCodigo() == medicamento.getCodigo()) {
-                                medicamento.setcant(medicamento.getCantidad() + recepcion.getCantidad());
-                                recepciones.remove(recepcion);
-                            }
-                        }
-                    }
-                    if (!recepciones.isEmpty()) {
-                        medicamentosTotales.addAll(recepciones);
-                    }
-                }
                 AdministrarMedicamento();
-                recepciones.clear();
             }
         }
     }
 
         public static void AdministrarMedicamento() {
-            if (bodegas.isEmpty()) {
-                System.out.println("No hay bodegas registradas");
-                RegistrarBodega();
-                }
-                System.out.println("Ingrese la direccion de la bodega que recibira la mercancia");
-                input.nextLine();
-                String direccion = input.nextLine();
-                for (Bodega bodega : bodegas) {
-                    if (bodega.getUbicacion().equals(direccion)) {
-                        for (Medicamento recepcion : recepciones) {
-                            bodega.repartirNeveras(recepcion);
-                        }
-                    } else {
-                        System.out.println("No se encuentra la bodega con la direccion: " + direccion);
+            if (neveras.isEmpty()) {
+                System.out.println("No hay neveras registradas");
+                Nevera nevera = new Nevera();
+                neveras.add(nevera);
+                System.out.println("Se ha creado una nevera nueva...");
+            }
+            for (Medicamento medicamento : medicamentosTotales) {
+                for (Nevera nevera : neveras) {
+                    if (nevera.getCapacidad() > 0 && medicamento.getCantidad() > 0) {
+                        nevera.agregarMedicamento(medicamento);
                     }
                 }
+                if(neveras.getLast().getCapacidad() == 0){
+                    Nevera nevera = new Nevera();
+                    neveras.add(nevera);
+                    AdministrarMedicamento();
+                }
             }
-
-    public static void RegistrarBodega(){
-        System.out.println("Registro de bodega");
-        System.out.println("Ingrese la ubicacion de la bodega: ");
-        String direccion = input.nextLine();
-        while (direccion.isEmpty()){
-            direccion = input.nextLine();
         }
-        Bodega bodega = new Bodega(direccion);
-        bodegas.add(bodega);
-        System.out.println("Bodega registrada con exito!");
-    }
 
     public static void RegistrarProveedor(){
         System.out.println("Ingrese NIT de proveedor: ");
@@ -353,14 +319,14 @@ public class Interfaz {
             System.out.println("-----------------------------");
             option = input.next();
             switch (option) {
-                case "1" -> VentaDetal();
+                //case "1" -> VentaDetal();
                 case "2" -> VentaMayor();
             }
             break;
         }
     }
 
-    public static void VentaDetal() {
+    /*public static void VentaDetal() {
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados!");
             System.out.println("Registre un Cliente :");
@@ -382,10 +348,10 @@ public class Interfaz {
                     while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
                         System.out.println("que desea comprar?");
                         option = input.next();
-                        drogasDetal.add(option);
                         System.out.println("¿Cantidad del producto que desea llevar?");
                         cantidad = input.nextInt();
                         Pedido pedido1 = new Pedido(option, cantidad);
+                        pedidos.add(pedido1);
                         System.out.println("desea algo mas?");
                         System.out.println("(escriba si o no)");
                         option2 = input.next();
@@ -412,15 +378,12 @@ public class Interfaz {
                             else{
                                 System.out.println("no hay disponibilidad");
                             }
-
                         }
                     }
                 }
             }
-
-
         }
-    }
+    }*/
 
     public static void VentaMayor() {
         if (clientes.isEmpty()) {

@@ -21,6 +21,15 @@ public class Pedido {
     public void setNombreM(String nombreM){
         this.nombreM = nombreM;
     }
+    public void setCantidadM(int cantidadM){
+        this.cantidadM = cantidadM;
+    }
+
+    @Override
+    public String toString(){
+        return "Nombre medicamento: " + getNombreM() + "\n" +
+                "Cantidad: " + getCantidadM() + "\n";
+    }
 
 
 }

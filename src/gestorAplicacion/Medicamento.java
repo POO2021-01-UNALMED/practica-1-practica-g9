@@ -47,6 +47,6 @@ public class Medicamento {
 
 	@Override
 	public String toString(){
-		return "Codigo: "+ this.codigo+"	Nombre:"+this.nombre+"		Cantidad en el inventario:"+this.cant;
+		return "Codigo: " + this.getCodigo() + "	 Nombre: " + this.getNombre() + "		Cantidad en el inventario: " + this.getCantidad();
 	}
 }
