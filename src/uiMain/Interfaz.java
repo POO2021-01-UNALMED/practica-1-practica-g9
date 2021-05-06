@@ -128,6 +128,7 @@ public class Interfaz {
             System.out.println("2. Inventario");
             System.out.println("3. Metodo3");
             System.out.println("4. Metodo4");
+            System.out.println("5. Metodo4");
             System.out.println("0. Salir y cancelar");
             System.out.println("-----------------------------");
             option = input.next();

@@ -99,14 +99,14 @@ public class Venta {
                 for(Nevera nevera1: bodega1.recorrerNeveras()){
                     for(Medicamento medicamento1: nevera1.recorrerMedicamentos()){
                         for(String string1:drogasDetal ){
-                            for(int int1: cantidades){
                                 if(medicamento1.getNombre().contains(string1)){
-                                    System.out.println("si hay disponibilidad");
+                                    //verificar cantidad
+                                    //si si mostrar que si disponibilidad
                                 }
                                 else{
                                     System.out.println("no hay disponibilidad");
                                 }
-                            }
+
                         }
                     }
                 }
