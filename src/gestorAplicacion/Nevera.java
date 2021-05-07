@@ -16,14 +16,15 @@ public class Nevera {
     public int getCapacidad() {
         return capacidad;
     }
-
     public int getCodigo() {
         return codigo;
     }
 
-    public int cantidadMedicamento() {
-        return 100 - capacidad;
+    //Setters
+    public void setCapacidad(int capacidad){
+        this.capacidad = capacidad;
     }
+
 
     public void agregarMedicamento(Medicamento medicamento) {
         if(this.getCapacidad() >= medicamento.getCantidad()){
@@ -31,24 +32,24 @@ public class Nevera {
                 for (Pedido med : cuenta) {
                     if (medicamento.getNombre().equals(med.getNombreM())) {
                         med.setCantidadM(med.getCantidadM() + medicamento.getCantidad());
-                        medicamento.setcant(0);
                         this.setCapacidad(this.getCapacidad() - medicamento.getCantidad());
+                        medicamento.setcant(0);
                         return;
                     }
                 }
             }
             cuenta.add(new Pedido(medicamento.getNombre(), medicamento.getCantidad()));
-            medicamento.setcant(0);
             this.setCapacidad(this.getCapacidad() - medicamento.getCantidad());
+            medicamento.setcant(0);
         } else {
             int aux;
             aux = medicamento.getCantidad() - this.getCapacidad();
             if (!cuenta.isEmpty()) {
                 for (Pedido med : cuenta) {
                     if (medicamento.getNombre().equals(med.getNombreM())) {
-                        med.setCantidadM(med.getCantidadM() + this.getCapacidad());
                         medicamento.setcant(aux);
                         this.setCapacidad(0);
+                        med.setCantidadM(med.getCantidadM() + this.getCapacidad());
                         return;
                     }
                 }
@@ -58,10 +59,8 @@ public class Nevera {
             this.setCapacidad(0);
         }
     }
-
-    //Setters
-    public void setCapacidad(int capacidad){
-        this.capacidad = capacidad;
+    public int cantidadMedicamento() {
+        return 100 - capacidad;
     }
 
     @Override
@@ -70,6 +69,6 @@ public class Nevera {
                 "Codigo: " + getCodigo() + "\n" +
                 "Capacidad: " + getCapacidad() + "\n" +
                 "Medicamento: " + cuenta.size() + "\n" +
-                "Lista: " + cuenta;
+                "-----------------------------------------";
+        }
     }
-}

@@ -216,7 +216,6 @@ public class Interfaz {
             for (Nevera nevera : neveras) {
                     System.out.println(nevera);
                 }
-            System.out.println(medicamentosTotales);
             }
         }
 
