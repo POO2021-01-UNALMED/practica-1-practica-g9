@@ -1,6 +1,7 @@
 package uiMain;
 import gestorAplicacion.*;
 
+import java.sql.SQLOutput;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -12,8 +13,10 @@ import static gestorAplicacion.Cliente.registrarCliente;
 public class Interfaz {
     public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null,0,0,null);
     public static LinkedList<Farmaceutico> farmaceuticos = new LinkedList<>();
+    public static LinkedList<Empleado> empleados = new LinkedList<>();
     public static LinkedList<Proveedor> proveedores = new LinkedList<>();
     public static LinkedList<Nevera> neveras = new LinkedList<>();
+    public static LinkedList<Vehiculo> vehiculos = new LinkedList<>();
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
     public static LinkedList<Integer> drogasMayor = new LinkedList<>();
@@ -165,6 +168,7 @@ public class Interfaz {
         System.out.println("Escoja una opcion:");
         System.out.println("1. Revisar inventario");
         System.out.println("2. Recibir mercancia");
+        System.out.println("3. Registrar vehiculo nuevo.");
         System.out.println("0. Salir");
         System.out.println("-----------------------------");
         String option = input.next();
@@ -175,7 +179,21 @@ public class Interfaz {
             case "2" ->
                     //Recibir mercancia();
                     RecibirMercancia();
+            case "3" ->
+                    // Registrar un vehículo
+                    RegistroVehiculo();
         }
+    }
+    public static void RegistroVehiculo(){
+        System.out.println("Ingrese modelo del vehículo:");
+        String Model = input.next();
+        System.out.println("Ingrese las placas del vehículo: ");
+        String placas = input.next();
+        System.out.println("Ingrese cc del encargado: ");
+        int cc = input.nextInt();
+        Vehiculo vehiculo = new Vehiculo(placas, Model, cc);
+        vehiculos.add(vehiculo);
+        System.out.println("----VEHICULO REGISTRADO EXITOSAMENTE----");
     }
     public static void RevisarInventario(){
         System.out.println("Escoja una opcion: ");
@@ -385,6 +403,7 @@ public class Interfaz {
     }*/
 
     public static void VentaMayor() {
+        boolean ye = false;
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados!");
             System.out.println("Registre un Cliente :");
@@ -394,44 +413,55 @@ public class Interfaz {
             int DocumentoCliente = input.nextInt();
             for (Cliente cliente : clientes) {
                 if (cliente.getDocumento() == DocumentoCliente) {
+                    ye = true;
                     System.out.println("que desea comprar?");
                     int option = input.nextInt();
                     System.out.println("¿Cantidad del producto que desea llevar?");
                     int cantidad = input.nextInt();
-
-                    cantidades.add(cantidad);
-                    drogasMayor.add(option);
+                    Pedido pedido1 = new Pedido(option, cantidad);
+                    pedidos.add(pedido1);
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
                     String option2 = input.next();
                     while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
                         System.out.println("que desea comprar?");
                         option = input.nextInt();
-                        drogasMayor.add(option);
                         System.out.println("¿Cantidad del producto que desea llevar?");
                         cantidad = input.nextInt();
-                        cantidades.add(cantidad);
+                        Pedido pedido2 = new Pedido(option, cantidad);
+                        pedidos.add(pedido2);
                         System.out.println("desea algo mas?");
                         System.out.println("(escriba si o no)");
                         option2 = input.next();
                     }
-                    ResumenVenta(drogasMayor, cantidades);
+                    ResumenVenta(pedidos);
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
-                    //entrega(cliente.getDireccion(), drogas, cantidades, vehiculo.placa);
+                    for (Vehiculo vehiculo:vehiculos) {
+                    if (vehiculo.getDisponibilidad()){
+                        vehiculo.entrega(cliente.getDireccion(), pedidos, vehiculo.getPlaca());
+                    }
+                    }
+
 
                 }
+                pedidos.clear(); //Se limpia el arreglo para una nueva venta.
             }
+
+            if(ye==false){
+                System.out.println("Usuario no encontrado." +
+                        "Registre a su cliente.");
+                registrarCliente();
+            } //Si despues de ingresar una cc, y no encontrar al cliente necesito registrarlo
+            // y luego volver al for que valida la cc para hacer la venta.
         }
-        System.out.println(cantidades);
-        System.out.println(drogasMayor);
+
     }
 
-    public static String ResumenVenta(LinkedList drogas, LinkedList cantidades) {
-        Iterator it = drogas.iterator();
-        Iterator ite = cantidades.iterator();
-        while(it.hasNext() && ite.hasNext()){
-            return it.next()+" "+ite.next();
+    public static String ResumenVenta(LinkedList pedidos) { //acá dejo el resumen de venta y creo que será compatible con los dos tipos de venta
+        Iterator it = pedidos.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
         }
         return null;
     }

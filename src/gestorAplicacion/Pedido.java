@@ -3,9 +3,14 @@ package gestorAplicacion;
 public class Pedido {
     private String nombreM;
     int cantidadM;
+    int codigo;
 
     public Pedido(String nombreM, int cantidadM){
         this.nombreM = nombreM;
+        this.cantidadM = cantidadM;
+    }
+    public Pedido(int cod, int cantidadM){
+        this.codigo = cod;
         this.cantidadM = cantidadM;
     }
 

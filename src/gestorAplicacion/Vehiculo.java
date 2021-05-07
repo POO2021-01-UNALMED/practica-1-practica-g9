@@ -2,13 +2,17 @@ package gestorAplicacion;
 
 import java.util.LinkedList;
 
+import static uiMain.Interfaz.empleados;
+
 public class Vehiculo {
         private String Placa;
         private String Modelo;
-        private Empleado Encargado;
+        private int Encargado;
         private boolean dispo; //disponibilidad del vehículo
+        private LinkedList<Pedido> pedidoM = new LinkedList<>();
+        private String direntrega;
 
-        public Vehiculo(String placa, String modelo, Empleado empleado) {
+        public Vehiculo(String placa, String modelo, int empleado) {
             this.Placa = placa;
             this.Modelo = modelo;
             this.Encargado = empleado;
@@ -23,8 +27,15 @@ public class Vehiculo {
         return Modelo;
     }
         public Empleado getEncargado() {
-        return Encargado;
-    }   public boolean getDisponibilidad(){return dispo;}
+            for (Empleado empleado : empleados) {
+                if (Encargado == empleado.getDocumento()) {
+                    return empleado;
+                }
+            }
+            return null;
+        }
+
+        public boolean getDisponibilidad(){return dispo;}
 
 
         //Setters
@@ -34,7 +45,7 @@ public class Vehiculo {
         public void setModelo(String modelo) {
             this.Modelo = Modelo;
         }
-        public void setEncargado(Empleado Encargado) {
+        public void setEncargado(int Encargado) {
             this.Encargado = Encargado;
         }
         public void cambioDisponibilidad(int dis){ //Disponibilidad del vehículo
@@ -43,8 +54,13 @@ public class Vehiculo {
             }
 
 
-        public void entrega(String direccion, LinkedList medicamentos, LinkedList cantidades, String vehiculo){
-
-
+        public void entrega(String direccion, LinkedList pedidos, String vehiculo){
+            this.direntrega = direccion;
+            this.pedidoM = pedidos;
+            this.Placa = vehiculo;
+            this.dispo = false;
+        }
+        public void entregacheck(){
+            this.dispo = true;
         }
     }
