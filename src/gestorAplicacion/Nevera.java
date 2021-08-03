@@ -3,7 +3,8 @@ package gestorAplicacion;
 import java.util.LinkedList;
 
 public class Nevera {
-    static LinkedList<Pedido> cuenta = new LinkedList<>();
+    public LinkedList<Medicamento> cuenta = new LinkedList<>();
+    public LinkedList<String> medicamentos = new LinkedList<>();
     private int capacidad;
     private final int codigo;
 
@@ -27,40 +28,74 @@ public class Nevera {
 
 
     public void agregarMedicamento(Medicamento medicamento) {
-        if(this.getCapacidad() >= medicamento.getCantidad()){
-            if (!cuenta.isEmpty()) {
-                for (Pedido med : cuenta) {
-                    if (medicamento.getNombre().equals(med.getNombreM())) {
-                        med.setCantidadM(med.getCantidadM() + medicamento.getCantidad());
+        if (medicamento.getCantidad() != 0) {
+            if (this.getCapacidad() >= medicamento.getCantidad()) {
+                if (!cuenta.isEmpty()) {
+                    if (medicamentos.contains(medicamento.getNombre())) {
+                        for (Medicamento med : cuenta) {
+                            if (medicamento.getNombre().equals(med.getNombre())) {
+                                med.setcant(med.getCantidad() + medicamento.getCantidad());
+                                this.setCapacidad(this.getCapacidad() - medicamento.getCantidad());
+                                medicamento.setcant(0);
+                            }
+                        }
+                    } else {
+                        cuenta.add(new Medicamento(medicamento.getNombre(), medicamento.getCantidad()));
+                        medicamentos.add(medicamento.getNombre());
                         this.setCapacidad(this.getCapacidad() - medicamento.getCantidad());
                         medicamento.setcant(0);
-                        return;
                     }
+                } else {
+                    cuenta.add(new Medicamento(medicamento.getNombre(), medicamento.getCantidad()));
+                    medicamentos.add(medicamento.getNombre());
+                    this.setCapacidad(this.getCapacidad() - medicamento.getCantidad());
+                    medicamento.setcant(0);
                 }
-            }
-            cuenta.add(new Pedido(medicamento.getNombre(), medicamento.getCantidad()));
-            this.setCapacidad(this.getCapacidad() - medicamento.getCantidad());
-            medicamento.setcant(0);
-        } else {
-            int aux;
-            aux = medicamento.getCantidad() - this.getCapacidad();
-            if (!cuenta.isEmpty()) {
-                for (Pedido med : cuenta) {
-                    if (medicamento.getNombre().equals(med.getNombreM())) {
-                        medicamento.setcant(aux);
+            } else {
+                int aux;
+                aux = medicamento.getCantidad() - this.getCapacidad();
+                if (!cuenta.isEmpty()) {
+                    if (medicamentos.contains(medicamento.getNombre())) {
+                        for (Medicamento med : cuenta) {
+                            if (medicamento.getNombre().equals(med.getNombre())) {
+                                medicamento.setcant(aux);
+                                this.setCapacidad(0);
+                                med.setcant(med.getCantidad() + this.getCapacidad());
+                            }
+                        }
+                    } else {
+                        cuenta.add(new Medicamento(medicamento.getNombre(), aux));
+                        medicamentos.add(medicamento.getNombre());
                         this.setCapacidad(0);
-                        med.setCantidadM(med.getCantidadM() + this.getCapacidad());
-                        return;
                     }
+                } else {
+                    cuenta.add(new Medicamento(medicamento.getNombre(), 100));
+                    medicamento.setcant(aux);
+                    this.setCapacidad(0);
                 }
             }
-            cuenta.add(new Pedido(medicamento.getNombre(), 100));
-            medicamento.setcant(aux);
-            this.setCapacidad(0);
         }
     }
     public int cantidadMedicamento() {
         return 100 - capacidad;
+    }
+    public int verificar(String nombre, int cantidad){
+        cuenta.removeIf(medicamento -> medicamento.getCantidad() == 0);
+        int aux = cantidad;
+        for(Medicamento medicamento : cuenta){
+            if(medicamento.getNombre().equals(nombre)){
+                if(medicamento.getCantidad() >= cantidad){
+                    medicamento.setcant(medicamento.getCantidad() - cantidad);
+                    setCapacidad(getCapacidad() + cantidad);
+                } else {
+                    aux = cantidad - medicamento.getCantidad();
+                    setCapacidad(getCapacidad() + medicamento.getCantidad());
+                    medicamento.setcant(0);
+                }
+            }
+        }
+        cuenta.removeIf(medicamento -> medicamento.getCantidad() == 0);
+        return aux;
     }
 
     @Override
@@ -69,6 +104,7 @@ public class Nevera {
                 "Codigo: " + getCodigo() + "\n" +
                 "Capacidad: " + getCapacidad() + "\n" +
                 "Medicamento: " + cuenta.size() + "\n" +
+                "Nombre de medicamentos: " + medicamentos + "\n" +
                 "-----------------------------------------";
         }
     }

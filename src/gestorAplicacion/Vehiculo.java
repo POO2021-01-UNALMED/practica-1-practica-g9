@@ -54,7 +54,7 @@ public class Vehiculo {
             }
 
 
-        public void entrega(String direccion, LinkedList pedidos, String vehiculo){
+        public void entrega(String direccion, LinkedList<Pedido> pedidos, String vehiculo){
             this.direntrega = direccion;
             this.pedidoM = pedidos;
             this.Placa = vehiculo;

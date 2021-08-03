@@ -1,23 +1,22 @@
 package gestorAplicacion;
 
 public class Medicamento {
-	private final int codigo;
-	private String nombre;
+	private final String nombre;
 	private Proveedor prov;
 	private String MetSuministro;
-	private int cant; //cantidad del medicamento en el inventario
-	public Medicamento(int codigo, String nombre, Proveedor prov, String metSuministro, int cant) {
-		this.codigo = codigo;
+	private int cantidad; //cantidad del medicamento en el inventario
+
+	public Medicamento(String nombre, int cantidad){
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+	}
+	public Medicamento(String nombre, Proveedor prov, int cant) {
 		this.nombre = nombre;
 		this.prov = prov;
-		this.MetSuministro = metSuministro;
-		this.cant = cant;
+		this.cantidad = cant;
 	}
 
 	//Setters
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	public void setProveedor(Proveedor prov) {
 		this.prov = prov;
 	}
@@ -25,7 +24,7 @@ public class Medicamento {
 		this.MetSuministro = metSuministro;
 	}
 	public void setcant(int cant) {
-		this.cant = cant;
+		this.cantidad = cant;
 	}
 
 	//Getters
@@ -33,13 +32,10 @@ public class Medicamento {
 		return this.prov;
 	}
 	public int getCantidad() {
-		return cant;
+		return cantidad;
 	}
 	public String getMetSuministro(){
 		return MetSuministro;
-	}
-	public int getCodigo() {
-		return this.codigo;
 	}
 	public String getNombre() {
 		return nombre;
@@ -47,6 +43,6 @@ public class Medicamento {
 
 	@Override
 	public String toString(){
-		return "Codigo: " + this.getCodigo() + "	 Nombre: " + this.getNombre() + "		Cantidad en el inventario: " + this.getCantidad();
+		return " Nombre: " + this.getNombre() + " Cantidad en el inventario: " + this.getCantidad();
 	}
 }

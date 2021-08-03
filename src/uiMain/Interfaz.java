@@ -1,7 +1,6 @@
 package uiMain;
 import gestorAplicacion.*;
 
-import java.sql.SQLOutput;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -19,9 +18,7 @@ public class Interfaz {
     public static LinkedList<Vehiculo> vehiculos = new LinkedList<>();
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
-    public static LinkedList<Integer> drogasMayor = new LinkedList<>();
     public static LinkedList<Pedido> pedidos = new LinkedList<>();
-    public static LinkedList<Integer> cantidades = new LinkedList<>(); //lista paralela con las cantidades de cada producto
 
 
     public static void main(String[] args) {
@@ -249,13 +246,23 @@ public class Interfaz {
                 while (true) {
                     System.out.println("Ingrese nombre de medicamento: ");
                     String nombre = input.next();
-                    System.out.println("Ingrese metodo de suministro: ");
-                    String metSuministro = input.next();
-                    System.out.println("Ingrese codigo de medicamento: ");
-                    int codigo = input.nextInt();
                     System.out.println("Ingrese cantidad de medicamento: ");
                     int cantidad = input.nextInt();
-                    medicamentosTotales.add(new Medicamento(codigo, nombre, proveedor, metSuministro, cantidad));
+                    if(medicamentosTotales.isEmpty()) {
+                        medicamentosTotales.add(new Medicamento(nombre, proveedor, cantidad));
+                    } else {
+                        boolean revision = false;
+                        for (Medicamento medicamento : medicamentosTotales) {
+                            if (medicamento.getNombre().equals(nombre)) {
+                                medicamento.setcant(medicamento.getCantidad() + cantidad);
+                                revision = true;
+                                break;
+                            }
+                        }
+                        if (!revision) {
+                            medicamentosTotales.add(new Medicamento(nombre, proveedor, cantidad));
+                        }
+                    }
                     System.out.println("Desea solicitar otro medicamento?: ");
                     System.out.println("1. si");
                     System.out.println("2. no");
@@ -303,6 +310,7 @@ public class Interfaz {
 
         Proveedor proveedor = new Proveedor(NIT,nombre,telefono,direccion);
         proveedores.add(proveedor);
+        System.out.println("Proveedor registrado satisfactoriamente!!");
     }
 
     private static void salirCancelar() {
@@ -326,6 +334,7 @@ public class Interfaz {
         }
     }
     public static void Vender() {
+        medicamentosTotales.removeIf(medicamento -> medicamento.getCantidad() == 0);
         String option;
         while (true) {
             System.out.println("-----------------------------");
@@ -403,7 +412,6 @@ public class Interfaz {
     }*/
 
     public static void VentaMayor() {
-        boolean ye = false;
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes registrados!");
             System.out.println("Registre un Cliente :");
@@ -413,19 +421,28 @@ public class Interfaz {
             int DocumentoCliente = input.nextInt();
             for (Cliente cliente : clientes) {
                 if (cliente.getDocumento() == DocumentoCliente) {
-                    ye = true;
                     System.out.println("que desea comprar?");
-                    int option = input.nextInt();
+                    String option = input.next();
                     System.out.println("¿Cantidad del producto que desea llevar?");
                     int cantidad = input.nextInt();
-                    Pedido pedido1 = new Pedido(option, cantidad);
-                    pedidos.add(pedido1);
+                    for(Medicamento medicamento : medicamentosTotales){
+                        if(medicamento.getNombre().equals(option) && medicamento.getCantidad() >= cantidad){
+                            Pedido pedido1 = new Pedido(option, cantidad);
+                            pedidos.add(pedido1);
+                            medicamento.setcant(medicamento.getCantidad() - cantidad);
+                            int aux = 0;
+                            for(Nevera nevera : neveras) {
+                                aux = nevera.verificar(option, cantidad) ;
+                                cantidad = aux;
+                            }
+                        }
+                    }
                     System.out.println("desea algo mas?");
                     System.out.println("(escriba si o no)");
                     String option2 = input.next();
                     while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
                         System.out.println("que desea comprar?");
-                        option = input.nextInt();
+                        option = input.next();
                         System.out.println("¿Cantidad del producto que desea llevar?");
                         cantidad = input.nextInt();
                         Pedido pedido2 = new Pedido(option, cantidad);
@@ -441,24 +458,18 @@ public class Interfaz {
                     if (vehiculo.getDisponibilidad()){
                         vehiculo.entrega(cliente.getDireccion(), pedidos, vehiculo.getPlaca());
                     }
-                    }
-
-
+                }
+            } else {
+                System.out.println("Usuario no encontrado." + "Registre a su cliente.");
+                registrarCliente();
                 }
                 pedidos.clear(); //Se limpia el arreglo para una nueva venta.
             }
-
-            if(ye==false){
-                System.out.println("Usuario no encontrado." +
-                        "Registre a su cliente.");
-                registrarCliente();
-            } //Si despues de ingresar una cc, y no encontrar al cliente necesito registrarlo
-            // y luego volver al for que valida la cc para hacer la venta.
         }
 
     }
 
-    public static String ResumenVenta(LinkedList pedidos) { //acá dejo el resumen de venta y creo que será compatible con los dos tipos de venta
+    public static String ResumenVenta(LinkedList<Pedido> pedidos) { //acá dejo el resumen de venta y creo que será compatible con los dos tipos de venta
         Iterator it = pedidos.iterator();
         while(it.hasNext()){
             System.out.println(it.next());
