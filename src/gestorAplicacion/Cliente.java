@@ -34,34 +34,4 @@ public class Cliente extends Persona {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
-
-	public static void registrarCliente() {
-		System.out.print("Documento : ");
-		int Documento = input.nextInt();
-		input.nextLine();
-		while (Documento <= 0) {
-			System.out.println("Documento invalido ,ingreselo de nuevo ");
-			System.out.print("Documento : ");
-			Documento = input.nextInt();
-		}
-
-		System.out.print("Nombre : ");
-		String Nombre = input.nextLine();
-		while (Nombre.equals("")) {
-			System.out.println("Nombre invalido, ingreselo de nuevo ");
-			System.out.print("Nombre : ");
-			Nombre = input.nextLine();
-		}
-		System.out.print("Direccion : ");
-		String direccion = input.nextLine();
-		while (direccion.equals("")) {
-			System.out.println("Dirección invalida, ingresela de nuevo. ");
-			System.out.print("Dirección : ");
-			direccion = input.nextLine();
-		}
-
-		Cliente nuevoCliente = new Cliente(Nombre,Documento,direccion);
-		clientes.add(nuevoCliente);
-		System.out.println("ClIENTE REGISTRADO EXITOSAMENTE");
-	}
 }

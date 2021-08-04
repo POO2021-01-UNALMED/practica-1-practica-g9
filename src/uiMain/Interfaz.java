@@ -5,11 +5,10 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import static gestorAplicacion.Cliente.clientes;
-import static gestorAplicacion.Cliente.registrarCliente;
 
 
 public class Interfaz {
-    public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null,0,0,null);
+    public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null, 0, 0, null);
     public static LinkedList<Farmaceutico> farmaceuticos = new LinkedList<>();
     public static LinkedList<Empleado> empleados = new LinkedList<>();
     public static LinkedList<Proveedor> proveedores = new LinkedList<>();
@@ -48,47 +47,6 @@ public class Interfaz {
         }
     }
 
-    public static void registrarFarmaceutico() {
-        //Registro de documento farmaceutico
-        System.out.print("Documento : ");
-        int Documento = input.nextInt();
-        input.nextLine();
-        while (Documento <= 0) {
-            System.out.println("Documento invalido ,ingreselo de nuevo ");
-            System.out.print("Documento : ");
-            Documento = input.nextInt();
-        }
-        //Registro de nombre farmaceutico
-        System.out.print("Nombre : ");
-        String Nombre = input.nextLine();
-        while (Nombre.equals("")) {
-            System.out.println("Nombre invalido, ingreselo de nuevo ");
-            System.out.print("Nombre : ");
-            Nombre = input.nextLine();
-        }
-        //Registro edad farmaceutico
-        System.out.print("Edad : ");
-        int Edad = input.nextInt();
-        if(Edad <= 18){
-            System.out.println("Edad invalida");
-            return;
-        }
-        //Registro contraseña
-        System.out.print("Contraseña : ");
-        input.nextLine();
-        String Password = input.nextLine();
-        while (Password.equals("")) {
-            System.out.println("Contraseña invalido, ingreselo de nuevo ");
-            System.out.print("Contraseña: ");
-            Password = input.nextLine();
-        }
-        //Creacion del objeto farmaceutico
-        Farmaceutico nuevoFarmaceutico = new Farmaceutico(Nombre, Edad, Documento, Password);
-        farmaceuticos.add(nuevoFarmaceutico);
-        System.out.println("FARMACEUTICO REGISTRADO EXITOSAMENTE");
-        ingresarFarmaceutico();
-    }
-
     public static void ingresarFarmaceutico() {
         if (farmaceuticos.isEmpty()) {
             System.out.println("No hay farmaceuticos registrados!");
@@ -107,15 +65,15 @@ public class Interfaz {
         String PasswordIngresado = input.nextLine();
         for (Farmaceutico farmaceutico : farmaceuticos) {
             if (farmaceutico.getDocumento() == DocumentoIngresado && farmaceutico.getPassword().equals(PasswordIngresado)) {
-                        System.out.println("-----------------------------");
-                        System.out.println("LOGUEADO CORRECTAMENTE");
-                        System.out.println("logueando...................");
-                        farmaceuticoLogueado = farmaceutico;
-                        menuPrincipal();
-                        return;
-                    }
-                }
+                System.out.println("-----------------------------");
+                System.out.println("LOGUEADO CORRECTAMENTE");
+                System.out.println("logueando...................");
+                farmaceuticoLogueado = farmaceutico;
+                menuPrincipal();
+                return;
             }
+        }
+    }
 
     public static void menuPrincipal() {
         String option;
@@ -134,15 +92,13 @@ public class Interfaz {
             option = input.next();
             switch (option) {
                 case "1":
-                    //ventas();
                     Vender();
                     break;
                 case "2":
-                    //Inventaro();
                     Inventario();
                     break;
                 case "3":
-                    //diagnostico();
+                    Registro();
                     break;
                 case "4":
                     //guardar();
@@ -150,10 +106,11 @@ public class Interfaz {
                 case "0":
                     salirCancelar();
                     break label;
-                }
             }
         }
-    public static void Inventario(){
+    }
+
+    public static void Inventario() {
         System.out.println("Ingresando al Inventario, escoja una opcion: ");
         System.out.println("-----------------------------");
         System.out.println("Escoja una opcion:");
@@ -175,7 +132,8 @@ public class Interfaz {
                     RegistroVehiculo();
         }
     }
-    public static void RegistroVehiculo(){
+
+    public static void RegistroVehiculo() {
         System.out.println("Ingrese modelo del vehículo:");
         String Model = input.next();
         System.out.println("Ingrese las placas del vehículo: ");
@@ -186,7 +144,8 @@ public class Interfaz {
         vehiculos.add(vehiculo);
         System.out.println("----VEHICULO REGISTRADO EXITOSAMENTE----");
     }
-    public static void RevisarInventario(){
+
+    public static void RevisarInventario() {
         System.out.println("Escoja una opcion: ");
         System.out.println("-----------------------------");
         System.out.println("Escoja una opcion:");
@@ -202,8 +161,9 @@ public class Interfaz {
             case "2" ->
                     //Busqueda total;
                     BusquedaTotal();
-                    }
-                }
+        }
+    }
+
     public static void BusquedaNevera() {
         if (neveras.isEmpty()) {
             System.out.println("No hay neveras registradas");
@@ -219,6 +179,7 @@ public class Interfaz {
             }
         }
     }
+
     public static void BusquedaTotal() {
         if (neveras.isEmpty()) {
             System.out.println("No hay neveras registradas");
@@ -226,9 +187,9 @@ public class Interfaz {
             for (Nevera nevera : neveras) {
                 nevera.reset();
                 System.out.println(nevera);
-                }
             }
         }
+    }
 
     public static void RecibirMercancia() {
         if (proveedores.isEmpty()) {
@@ -244,7 +205,7 @@ public class Interfaz {
                     String nombre = input.next();
                     System.out.println("Ingrese cantidad de medicamento: ");
                     int cantidad = input.nextInt();
-                    if(medicamentosTotales.isEmpty()) {
+                    if (medicamentosTotales.isEmpty()) {
                         medicamentosTotales.add(new Medicamento(nombre, proveedor, cantidad));
                     } else {
                         boolean revision = false;
@@ -273,54 +234,37 @@ public class Interfaz {
         }
     }
 
-        public static void AdministrarMedicamento() {
-            if (neveras.isEmpty()) {
-                System.out.println("No hay neveras registradas");
+    public static void AdministrarMedicamento() {
+        if (neveras.isEmpty()) {
+            System.out.println("No hay neveras registradas");
+            Nevera nevera = new Nevera();
+            neveras.add(nevera);
+            System.out.println("Se ha creado una nevera nueva...");
+        }
+        for (Medicamento medicamento : medicamentosTotales) {
+            for (Nevera nevera : neveras) {
+                if (nevera.getCapacidad() > 0 && medicamento.getCantidad() > 0) {
+                    nevera.agregarMedicamento(medicamento);
+                }
+            }
+            if (neveras.getLast().getCapacidad() == 0) {
                 Nevera nevera = new Nevera();
                 neveras.add(nevera);
-                System.out.println("Se ha creado una nevera nueva...");
-            }
-            for (Medicamento medicamento : medicamentosTotales) {
-                for (Nevera nevera : neveras) {
-                    if (nevera.getCapacidad() > 0 && medicamento.getCantidad() > 0) {
-                        nevera.agregarMedicamento(medicamento);
-                    }
-                }
-                if(neveras.getLast().getCapacidad() == 0){
-                    Nevera nevera = new Nevera();
-                    neveras.add(nevera);
-                    AdministrarMedicamento();
-                }
+                AdministrarMedicamento();
             }
         }
-
-    public static void RegistrarProveedor(){
-        System.out.println("Ingrese NIT de proveedor: ");
-        int NIT = input.nextInt();
-        System.out.println("Ingrese nombre de proveedor: ");
-        String nombre = input.next();
-        System.out.println("Ingrese telefono de proveedor: ");
-        long telefono = input.nextLong();
-        System.out.println("Ingrese direccion de proveedor: ");
-        input.nextLine();
-        String direccion = input.nextLine();
-
-        Proveedor proveedor = new Proveedor(NIT,nombre,telefono,direccion);
-        proveedores.add(proveedor);
-        System.out.println("Proveedor registrado satisfactoriamente!!");
     }
 
     private static void salirCancelar() {
-        while(true){
+        while (true) {
             System.out.println("Si sale ahora se perderan los cambios sin guardar");
             System.out.println("Ingrese [N] si desea regresar al  menu principal");
             System.out.println("Ingrese [Y] si desea cerrar el programa");
             String cerrado = input.next();
-            if (cerrado.equals("N")||cerrado.equals("n")) {
+            if (cerrado.equals("N") || cerrado.equals("n")) {
                 System.out.println("Regresando al menu principal");
                 return;
-            }
-            else if (cerrado.equals("Y")||cerrado.equals("y")) {
+            } else if (cerrado.equals("Y") || cerrado.equals("y")) {
                 System.out.println("CERRANDO PROGRAMA");
                 System.exit(0);
 
@@ -330,21 +274,22 @@ public class Interfaz {
             }
         }
     }
+
     public static void Vender() {
         medicamentosTotales.removeIf(medicamento -> medicamento.getCantidad() == 0);
         String option;
-            System.out.println("-----------------------------");
-            System.out.println("Escoja una opcion:");
-            System.out.println("1. Venta al detal");
-            System.out.println("2. Venta al por mayor");
-            System.out.println("0. Salir");
-            System.out.println("-----------------------------");
-            option = input.next();
-            switch (option) {
-                case "1" -> VentaDetal();
-                case "2" -> VentaMayor();
-            }
+        System.out.println("-----------------------------");
+        System.out.println("Escoja una opcion:");
+        System.out.println("1. Venta al detal");
+        System.out.println("2. Venta al por mayor");
+        System.out.println("0. Salir");
+        System.out.println("-----------------------------");
+        option = input.next();
+        switch (option) {
+            case "1" -> VentaDetal();
+            case "2" -> VentaMayor();
         }
+    }
 
     public static void VentaDetal() {
         while (true) {
@@ -355,7 +300,7 @@ public class Interfaz {
             int count = cantidad;
             for (Nevera nevera : neveras) {
                 count = nevera.verificarCantidad(option, count);
-                }
+            }
             if (count <= 0) {
                 Medicamento pedido = new Medicamento(option, cantidad);
                 pedidos.add(pedido);
@@ -363,20 +308,20 @@ public class Interfaz {
                 for (Nevera nevera : neveras) {
                     aux = nevera.reducir(option, cantidad);
                     cantidad = aux;
-                    }
-                } else {
-                System.out.println("No hay medicamento suficiente!");
                 }
+            } else {
+                System.out.println("No hay medicamento suficiente!");
+            }
             System.out.println("Desea algo mas?");
             System.out.println("1. Si");
             System.out.println("2. No");
             int option2 = input.nextInt();
-            if(option2 == 2){
+            if (option2 == 2) {
                 break;
             }
         }
         System.out.println("----------[Resumen del Pedido]-----------------");
-        for(Medicamento pedido : pedidos){
+        for (Medicamento pedido : pedidos) {
             System.out.println(pedido);
         }
         pedidos.clear();
@@ -392,7 +337,7 @@ public class Interfaz {
             int DocumentoCliente = input.nextInt();
             for (Cliente cliente : clientes) {
                 if (cliente.getDocumento() == DocumentoCliente) {
-                    while(true) {
+                    while (true) {
                         System.out.println("que desea comprar?");
                         String option = input.next();
                         System.out.println("¿Cantidad del producto que desea llevar?");
@@ -416,27 +361,246 @@ public class Interfaz {
                         System.out.println("1. Si");
                         System.out.println("2. No");
                         int decision = input.nextInt();
-                        if (decision == 2){
+                        if (decision == 2) {
                             break;
                         }
                     }
                     System.out.println("----------[Resumen del Pedido]-----------------");
-                    for(Medicamento pedido : pedidos){
+                    for (Medicamento pedido : pedidos) {
                         System.out.println(pedido);
                     }
                     System.out.println("-----------------------------------------------");
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
-                    for (Vehiculo vehiculo:vehiculos) {
-                    if (vehiculo.getDisponibilidad()){
-                        vehiculo.entrega(cliente.getDireccion(), pedidos, vehiculo.getPlaca());
+                    for (Vehiculo vehiculo : vehiculos) {
+                        if (vehiculo.getDisponibilidad()) {
+                            vehiculo.entrega(cliente.getDireccion(), pedidos, vehiculo.getPlaca());
+                        }
                     }
-                }
-            } else {
-                System.out.println("Usuario no encontrado." + "Registre a su cliente.");
-                registrarCliente();
+                } else {
+                    System.out.println("Usuario no encontrado." + "Registre a su cliente.");
+                    registrarCliente();
                 }
                 pedidos.clear(); //Se limpia el arreglo para una nueva venta.
+            }
+        }
+    }
+
+    public static void Registro() {
+        String option;
+        System.out.println("-----------------------------");
+        System.out.println("Escoja una opcion:");
+        System.out.println("1. Registrar");
+        System.out.println("2. Eliminar");
+        System.out.println("0. Salir");
+        System.out.println("-----------------------------");
+        option = input.next();
+        switch (option) {
+            case "1":
+                Registrar();
+                break;
+            case "2":
+                Eliminar();
+                break;
+            case "0":
+                break;
+        }
+    }
+
+    public static void Registrar() {
+        String option;
+        System.out.println("-----------------------------");
+        System.out.println("Escoja una opcion:");
+        System.out.println("1. Empleado");
+        System.out.println("2. Farmaceutico");
+        System.out.println("3. Cliente");
+        System.out.println("4. Proveedor");
+        System.out.println("0. Salir");
+        System.out.println("-----------------------------");
+        option = input.next();
+        switch (option) {
+            case "1":
+                registrarEmpleado();
+            case "2":
+                registrarFarmaceutico();
+            case "3":
+                registrarCliente();
+            case "4":
+                RegistrarProveedor();
+            case "0":
+                break;
+        }
+    }
+    public static void registrarFarmaceutico() {
+        //Registro de documento farmaceutico
+        System.out.print("Documento : ");
+        int Documento = input.nextInt();
+        input.nextLine();
+        while (Documento <= 0) {
+            System.out.println("Documento invalido ,ingreselo de nuevo ");
+            System.out.print("Documento : ");
+            Documento = input.nextInt();
+        }
+        //Registro de nombre farmaceutico
+        System.out.print("Nombre : ");
+        String Nombre = input.nextLine();
+        while (Nombre.equals("")) {
+            System.out.println("Nombre invalido, ingreselo de nuevo ");
+            System.out.print("Nombre : ");
+            Nombre = input.nextLine();
+        }
+        //Registro edad farmaceutico
+        System.out.print("Edad : ");
+        int Edad = input.nextInt();
+        if (Edad <= 18) {
+            System.out.println("Edad invalida");
+            return;
+        }
+        //Registro contraseña
+        System.out.print("Contraseña : ");
+        input.nextLine();
+        String Password = input.nextLine();
+        while (Password.equals("")) {
+            System.out.println("Contraseña invalido, ingreselo de nuevo ");
+            System.out.print("Contraseña: ");
+            Password = input.nextLine();
+        }
+        //Creacion del objeto farmaceutico
+        Farmaceutico nuevoFarmaceutico = new Farmaceutico(Nombre, Edad, Documento, Password);
+        farmaceuticos.add(nuevoFarmaceutico);
+        System.out.println("FARMACEUTICO REGISTRADO EXITOSAMENTE");
+        ingresarFarmaceutico();
+    }
+    public static void RegistrarProveedor() {
+        System.out.println("Ingrese NIT de proveedor: ");
+        int NIT = input.nextInt();
+        System.out.println("Ingrese nombre de proveedor: ");
+        String nombre = input.next();
+        System.out.println("Ingrese telefono de proveedor: ");
+        long telefono = input.nextLong();
+        System.out.println("Ingrese direccion de proveedor: ");
+        input.nextLine();
+        String direccion = input.nextLine();
+
+        Proveedor proveedor = new Proveedor(NIT, nombre, telefono, direccion);
+        proveedores.add(proveedor);
+        System.out.println("Proveedor registrado satisfactoriamente!!");
+    }
+    public static void registrarCliente() {
+        System.out.print("Documento : ");
+        int Documento = input.nextInt();
+        input.nextLine();
+        while (Documento <= 0) {
+            System.out.println("Documento invalido ,ingreselo de nuevo ");
+            System.out.print("Documento : ");
+            Documento = input.nextInt();
+        }
+
+        System.out.print("Nombre : ");
+        String Nombre = input.nextLine();
+        while (Nombre.equals("")) {
+            System.out.println("Nombre invalido, ingreselo de nuevo ");
+            System.out.print("Nombre : ");
+            Nombre = input.nextLine();
+        }
+        System.out.print("Direccion : ");
+        String direccion = input.nextLine();
+        while (direccion.equals("")) {
+            System.out.println("Dirección invalida, ingresela de nuevo. ");
+            System.out.print("Dirección : ");
+            direccion = input.nextLine();
+        }
+
+        Cliente nuevoCliente = new Cliente(Nombre,Documento,direccion);
+        clientes.add(nuevoCliente);
+        System.out.println("ClIENTE REGISTRADO EXITOSAMENTE");
+    }
+    public static void registrarEmpleado(){
+        System.out.println("Ingrese nombre de empleado: ");
+        String nombre = input.next();
+        System.out.println("Ingrese edad de empleado: ");
+        int edad = input.nextInt();
+        System.out.println("Ingrese documento de empleado: ");
+        int documento = input.nextInt();
+        System.out.println("Ingrese direccion de empleado: ");
+        String direccion = input.next();
+        System.out.println("Ingrese telefono de empleado");
+        int telefono = input.nextInt();
+        System.out.println("Ingrese cargo de empleado");
+        String cargo = input.next();
+
+        input.nextLine();
+
+        Empleado empleado = new Empleado(nombre, edad, documento, direccion, telefono, cargo);
+        empleados.add(empleado);
+        System.out.println("Empleado registrado exitosamente");
+    }
+
+    public static void Eliminar(){
+        String option;
+        System.out.println("-----------------------------");
+        System.out.println("Escoja una opcion:");
+        System.out.println("1. Empleado");
+        System.out.println("2. Farmaceutico");
+        System.out.println("3. Cliente");
+        System.out.println("4. Proveedor");
+        System.out.println("0. Salir");
+        System.out.println("-----------------------------");
+        option = input.next();
+        switch (option) {
+            case "1":
+                eliminarEmpleado();
+            case "2":
+                eliminarFarmaceutico();
+            case "3":
+                eliminarCliente();
+            case "4":
+                eliminarProveedor();
+            case "0":
+                break;
+        }
+    }
+    public static void eliminarFarmaceutico(){
+        System.out.println("Ingrese el documento: ");
+        int documento = input.nextInt();
+        for(Farmaceutico farmaceutico : farmaceuticos){
+            if (farmaceutico.getDocumento() == documento){
+                farmaceuticos.remove(farmaceutico);
+            } else {
+                System.out.println("No se encuentra el farmaceutico!");
+            }
+        }
+    }
+    public static void eliminarEmpleado(){
+        System.out.println("Ingrese el documento: ");
+        int documento = input.nextInt();
+        for(Empleado empleado : empleados){
+            if (empleado.getDocumento() == documento){
+                empleados.remove(empleado);
+            } else {
+                System.out.println("No se encuentra el empleado!");
+            }
+        }
+    }
+    public static void eliminarCliente(){
+        System.out.println("Ingrese el documento: ");
+        int documento = input.nextInt();
+        for(Cliente cliente : clientes){
+            if (cliente.getDocumento() == documento){
+                clientes.remove(cliente);
+            } else {
+                System.out.println("No se encuentra el cliente!");
+            }
+        }
+    }
+    public static void eliminarProveedor(){
+        System.out.println("Ingrese el NIT del proveedor: ");
+        int NIT = input.nextInt();
+        for(Proveedor proveedor : proveedores){
+            if (proveedor.getNIT() == NIT){
+                proveedores.remove(proveedor);
+            } else {
+                System.out.println("No se encuentra el proveedor!");
             }
         }
     }
