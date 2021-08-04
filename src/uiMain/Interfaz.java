@@ -1,7 +1,6 @@
 package uiMain;
 import gestorAplicacion.*;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -18,16 +17,13 @@ public class Interfaz {
     public static LinkedList<Vehiculo> vehiculos = new LinkedList<>();
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
-    public static LinkedList<Pedido> pedidos = new LinkedList<>();
+    public static LinkedList<Medicamento> pedidos = new LinkedList<>();
 
 
     public static void main(String[] args) {
         String option;
-
-        
         label:
         while (true) {
-
             System.out.println("-----------------------------");
             System.out.println("Bienvenido ");
             System.out.println("Escoja una opcion:");
@@ -40,14 +36,12 @@ public class Interfaz {
             switch (option) {
                 case "1":
                     ingresarFarmaceutico();
-
-
                     break;
+
                 case "2":
                     registrarFarmaceutico();
-
-
                     break;
+
                 case "0":
                     break label;
             }
@@ -218,6 +212,7 @@ public class Interfaz {
             input.nextLine();
             int codigo = input.nextInt();
             for (Nevera nevera : neveras) {
+                nevera.reset();
                 if (codigo == nevera.getCodigo()) {
                     System.out.println(nevera);
                 }
@@ -229,7 +224,8 @@ public class Interfaz {
             System.out.println("No hay neveras registradas");
         } else {
             for (Nevera nevera : neveras) {
-                    System.out.println(nevera);
+                nevera.reset();
+                System.out.println(nevera);
                 }
             }
         }
@@ -263,6 +259,7 @@ public class Interfaz {
                             medicamentosTotales.add(new Medicamento(nombre, proveedor, cantidad));
                         }
                     }
+                    System.out.println(medicamentosTotales);
                     System.out.println("Desea solicitar otro medicamento?: ");
                     System.out.println("1. si");
                     System.out.println("2. no");
@@ -336,7 +333,6 @@ public class Interfaz {
     public static void Vender() {
         medicamentosTotales.removeIf(medicamento -> medicamento.getCantidad() == 0);
         String option;
-        while (true) {
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
             System.out.println("1. Venta al detal");
@@ -345,71 +341,46 @@ public class Interfaz {
             System.out.println("-----------------------------");
             option = input.next();
             switch (option) {
-                //case "1" -> VentaDetal();
+                case "1" -> VentaDetal();
                 case "2" -> VentaMayor();
             }
-            break;
         }
-    }
 
-    /*public static void VentaDetal() {
-        if (clientes.isEmpty()) {
-            System.out.println("No hay clientes registrados!");
-            System.out.println("Registre un Cliente :");
-            registrarCliente();
-        } else {
-            System.out.println("Documento Del cliente =");
-            int DocumentoCliente = input.nextInt();
-            for (Cliente cliente : clientes) {
-                if (cliente.getDocumento() == DocumentoCliente) {
-                    System.out.println("que desea comprar?");
-                    String option = input.next();
-                    System.out.println("Cantidad del producto");
-                    int cantidad = input.nextInt();
-                    Pedido pedido = new Pedido(option, cantidad);
-                    pedidos.add(pedido);
-                    System.out.println("desea algo mas?");
-                    System.out.println("(escriba si o no)");
-                    String option2 = input.next();
-                    while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
-                        System.out.println("que desea comprar?");
-                        option = input.next();
-                        System.out.println("¿Cantidad del producto que desea llevar?");
-                        cantidad = input.nextInt();
-                        Pedido pedido1 = new Pedido(option, cantidad);
-                        pedidos.add(pedido1);
-                        System.out.println("desea algo mas?");
-                        System.out.println("(escriba si o no)");
-                        option2 = input.next();
-                    }
+    public static void VentaDetal() {
+        while (true) {
+            System.out.println("Que desea comprar?");
+            String option = input.next();
+            System.out.println("Cantidad del producto");
+            int cantidad = input.nextInt();
+            int count = cantidad;
+            for (Nevera nevera : neveras) {
+                count = nevera.verificarCantidad(option, count);
                 }
+            if (count <= 0) {
+                Medicamento pedido = new Medicamento(option, cantidad);
+                pedidos.add(pedido);
+                int aux;
+                for (Nevera nevera : neveras) {
+                    aux = nevera.reducir(option, cantidad);
+                    cantidad = aux;
+                    }
+                } else {
+                System.out.println("No hay medicamento suficiente!");
+                }
+            System.out.println("Desea algo mas?");
+            System.out.println("1. Si");
+            System.out.println("2. No");
+            int option2 = input.nextInt();
+            if(option2 == 2){
+                break;
             }
         }
-        System.out.println("ingrese direccion de la bodega");
-        input.nextLine();
-        String direccion = input.nextLine();
-// esto de aqui abajo esta en via de desarrollo porque no funciona (imprime 900 cosas) , no lo usen aun , pls UwU
-        for (Bodega bodega1 : bodegas) {
-            if (bodega1.getUbicacion().equals(direccion)) {
-                System.out.println(bodega1.getUbicacion());
-                for(Nevera nevera1: bodega1.recorrerNeveras()){
-                    System.out.println(nevera1);
-                    for(Medicamento medicamento1: nevera1.recorrerMedicamentos()){
-                        System.out.println(medicamento1);
-                        for(Pedido pedido : pedidos){
-                            if(medicamento1.getNombre().equals(pedido.getNombreM()) && medicamento1.getCantidad() >= pedido.getCantidadM()){
-                                System.out.println("Si hay disponibilidad");
-                                break;
-                            }
-                            else{
-                                System.out.println("no hay disponibilidad");
-                            }
-                        }
-                    }
-                }
-            }
+        System.out.println("----------[Resumen del Pedido]-----------------");
+        for(Medicamento pedido : pedidos){
+            System.out.println(pedido);
         }
-    }*/
+        pedidos.clear();
+    }
 
     public static void VentaMayor() {
         if (clientes.isEmpty()) {
@@ -421,37 +392,39 @@ public class Interfaz {
             int DocumentoCliente = input.nextInt();
             for (Cliente cliente : clientes) {
                 if (cliente.getDocumento() == DocumentoCliente) {
-                    System.out.println("que desea comprar?");
-                    String option = input.next();
-                    System.out.println("¿Cantidad del producto que desea llevar?");
-                    int cantidad = input.nextInt();
-                    for(Medicamento medicamento : medicamentosTotales){
-                        if(medicamento.getNombre().equals(option) && medicamento.getCantidad() >= cantidad){
-                            Pedido pedido1 = new Pedido(option, cantidad);
-                            pedidos.add(pedido1);
-                            medicamento.setcant(medicamento.getCantidad() - cantidad);
-                            int aux = 0;
-                            for(Nevera nevera : neveras) {
-                                aux = nevera.verificar(option, cantidad) ;
+                    while(true) {
+                        System.out.println("que desea comprar?");
+                        String option = input.next();
+                        System.out.println("¿Cantidad del producto que desea llevar?");
+                        int cantidad = input.nextInt();
+                        int count = cantidad;
+                        for (Nevera nevera : neveras) {
+                            count = nevera.verificarCantidad(option, count);
+                        }
+                        if (count <= 0) {
+                            Medicamento pedido = new Medicamento(option, cantidad);
+                            pedidos.add(pedido);
+                            int aux;
+                            for (Nevera nevera : neveras) {
+                                aux = nevera.reducir(option, cantidad);
                                 cantidad = aux;
                             }
+                        } else {
+                            System.out.println("No hay medicamento suficiente!");
+                        }
+                        System.out.println("desea algo mas?");
+                        System.out.println("1. Si");
+                        System.out.println("2. No");
+                        int decision = input.nextInt();
+                        if (decision == 2){
+                            break;
                         }
                     }
-                    System.out.println("desea algo mas?");
-                    System.out.println("(escriba si o no)");
-                    String option2 = input.next();
-                    while ((option2).equals("si") || option2.equals("SI") || option2.equals("Si") || option2.equals("sI")) {
-                        System.out.println("que desea comprar?");
-                        option = input.next();
-                        System.out.println("¿Cantidad del producto que desea llevar?");
-                        cantidad = input.nextInt();
-                        Pedido pedido2 = new Pedido(option, cantidad);
-                        pedidos.add(pedido2);
-                        System.out.println("desea algo mas?");
-                        System.out.println("(escriba si o no)");
-                        option2 = input.next();
+                    System.out.println("----------[Resumen del Pedido]-----------------");
+                    for(Medicamento pedido : pedidos){
+                        System.out.println(pedido);
                     }
-                    ResumenVenta(pedidos);
+                    System.out.println("-----------------------------------------------");
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
                     for (Vehiculo vehiculo:vehiculos) {
@@ -466,14 +439,5 @@ public class Interfaz {
                 pedidos.clear(); //Se limpia el arreglo para una nueva venta.
             }
         }
-
-    }
-
-    public static String ResumenVenta(LinkedList<Pedido> pedidos) { //acá dejo el resumen de venta y creo que será compatible con los dos tipos de venta
-        Iterator it = pedidos.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
-        return null;
     }
 }

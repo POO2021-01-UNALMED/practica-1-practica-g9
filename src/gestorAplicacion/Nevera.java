@@ -64,9 +64,10 @@ public class Nevera {
                             }
                         }
                     } else {
-                        cuenta.add(new Medicamento(medicamento.getNombre(), aux));
+                        cuenta.add(new Medicamento(medicamento.getNombre(), getCapacidad()));
                         medicamentos.add(medicamento.getNombre());
                         this.setCapacidad(0);
+                        medicamento.setcant(aux);
                     }
                 } else {
                     cuenta.add(new Medicamento(medicamento.getNombre(), 100));
@@ -79,7 +80,17 @@ public class Nevera {
     public int cantidadMedicamento() {
         return 100 - capacidad;
     }
-    public int verificar(String nombre, int cantidad){
+    public int verificarCantidad(String nombre, int cantidad){
+        cuenta.removeIf(medicamento -> medicamento.getCantidad() == 0);
+        int aux = cantidad;
+        for(Medicamento medicamento : cuenta){
+            if(medicamento.getNombre().equals(nombre)){
+                aux = (cantidad - medicamento.getCantidad());
+            }
+        }
+        return aux;
+    }
+    public int reducir(String nombre, int cantidad){
         cuenta.removeIf(medicamento -> medicamento.getCantidad() == 0);
         int aux = cantidad;
         for(Medicamento medicamento : cuenta){
@@ -87,6 +98,7 @@ public class Nevera {
                 if(medicamento.getCantidad() >= cantidad){
                     medicamento.setcant(medicamento.getCantidad() - cantidad);
                     setCapacidad(getCapacidad() + cantidad);
+                    aux = 0;
                 } else {
                     aux = cantidad - medicamento.getCantidad();
                     setCapacidad(getCapacidad() + medicamento.getCantidad());
@@ -97,6 +109,9 @@ public class Nevera {
         cuenta.removeIf(medicamento -> medicamento.getCantidad() == 0);
         return aux;
     }
+    public void reset(){
+        cuenta.removeIf(medicamento -> medicamento.getCantidad() == 0);
+    }
 
     @Override
     public String toString(){
@@ -104,7 +119,7 @@ public class Nevera {
                 "Codigo: " + getCodigo() + "\n" +
                 "Capacidad: " + getCapacidad() + "\n" +
                 "Medicamento: " + cuenta.size() + "\n" +
-                "Nombre de medicamentos: " + medicamentos + "\n" +
+                "Lista de medicamentos: " + cuenta + "\n" +
                 "-----------------------------------------";
         }
     }

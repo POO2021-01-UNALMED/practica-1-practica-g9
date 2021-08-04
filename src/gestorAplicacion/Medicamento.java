@@ -3,7 +3,6 @@ package gestorAplicacion;
 public class Medicamento {
 	private final String nombre;
 	private Proveedor prov;
-	private String MetSuministro;
 	private int cantidad; //cantidad del medicamento en el inventario
 
 	public Medicamento(String nombre, int cantidad){
@@ -20,9 +19,6 @@ public class Medicamento {
 	public void setProveedor(Proveedor prov) {
 		this.prov = prov;
 	}
-	public void setMetSuministro(String metSuministro){
-		this.MetSuministro = metSuministro;
-	}
 	public void setcant(int cant) {
 		this.cantidad = cant;
 	}
@@ -34,15 +30,12 @@ public class Medicamento {
 	public int getCantidad() {
 		return cantidad;
 	}
-	public String getMetSuministro(){
-		return MetSuministro;
-	}
 	public String getNombre() {
 		return nombre;
 	}
 
 	@Override
 	public String toString(){
-		return " Nombre: " + this.getNombre() + " Cantidad en el inventario: " + this.getCantidad();
+		return " Nombre: " + this.getNombre() + " Cantidad: " + this.getCantidad();
 	}
 }
