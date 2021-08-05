@@ -1,12 +1,13 @@
 package uiMain;
 
-import gestorAplicacion.*;
+import gestorAplicacion.Abstracto.Vehiculo;
+import gestorAplicacion.Heredados.*;
 
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import static gestorAplicacion.Cliente.clientes;
+import static gestorAplicacion.Heredados.Cliente.clientes;
 
 
 public class Interfaz {
@@ -22,8 +23,6 @@ public class Interfaz {
 
 
     public static void main(String[] args) {
-
-
 //deserializar
         FileInputStream fileIn;
         try {
@@ -311,7 +310,7 @@ public class Interfaz {
             System.out.println("Escoja una opcion:");
             System.out.println("1. Vender");
             System.out.println("2. Inventario");
-            System.out.println("3. Metodo3");
+            System.out.println("3. Registro");
             System.out.println("4. Metodo4");
             System.out.println("5. Metodo4");
             System.out.println("0. Salir y cancelar");
@@ -376,7 +375,7 @@ public class Interfaz {
         System.out.println("Escoja una opcion: ");
         System.out.println("-----------------------------");
         System.out.println("Escoja una opcion:");
-        System.out.println("1. Busqueda por bodega");
+        System.out.println("1. Busqueda por codigo");
         System.out.println("2. Busqueda total");
         System.out.println("0. Salir");
         System.out.println("-----------------------------");
@@ -831,9 +830,7 @@ public class Interfaz {
             Password = input.nextLine();
         }
         //Creacion del objeto farmaceutico
-
         Farmaceutico nuevoFarmaceutico = new Farmaceutico(Nombre, Edad, Documento, Password);
-
         farmaceuticos.add(nuevoFarmaceutico);
         System.out.println("FARMACEUTICO REGISTRADO EXITOSAMENTE");
         ingresarFarmaceutico();

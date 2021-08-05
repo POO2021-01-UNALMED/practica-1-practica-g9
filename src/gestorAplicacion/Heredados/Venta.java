@@ -1,4 +1,5 @@
-package gestorAplicacion;
+package gestorAplicacion.Heredados;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 

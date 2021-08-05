@@ -1,6 +1,8 @@
-package gestorAplicacion;
+package gestorAplicacion.Heredados;
 
-public class Farmaceutico extends Persona{
+import gestorAplicacion.Abstracto.Persona;
+
+public class Farmaceutico extends Persona {
     private String password;
 
     public Farmaceutico(String nombre, int edad, int documento, String password) {

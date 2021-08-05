@@ -1,4 +1,7 @@
-package gestorAplicacion;
+package gestorAplicacion.Abstracto;
+
+import gestorAplicacion.Heredados.Empleado;
+import gestorAplicacion.Heredados.Medicamento;
 
 import java.io.Serializable;
 import java.util.LinkedList;
