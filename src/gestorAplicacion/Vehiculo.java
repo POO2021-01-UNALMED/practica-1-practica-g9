@@ -1,10 +1,11 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import static uiMain.Interfaz.empleados;
 
-public class Vehiculo {
+public class Vehiculo implements Serializable {
     private String Placa;
     private String Modelo;
     private int Encargado;

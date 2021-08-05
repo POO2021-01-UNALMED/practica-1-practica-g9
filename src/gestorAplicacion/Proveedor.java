@@ -1,6 +1,8 @@
 package gestorAplicacion;
 
-public class Proveedor {
+import java.io.Serializable;
+
+public class Proveedor  implements Serializable {
 	private int NIT;
 	private String nombreprov; // nombre proveedor
 	private long telefonoprov; // telefono del proveedor

@@ -1,6 +1,8 @@
 package uiMain;
+
 import gestorAplicacion.*;
 
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -20,6 +22,231 @@ public class Interfaz {
 
 
     public static void main(String[] args) {
+
+
+//deserializar
+        FileInputStream fileIn;
+        try {
+            fileIn = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempFarmaceutico.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+
+            try {
+                Object obj = in.readObject();
+
+                while (obj != null) {
+                    farmaceuticos.add((Farmaceutico) obj);
+                    obj = in.readObject();
+
+                }
+            } catch (EOFException e) {
+            }
+            in.close();
+            fileIn.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        FileInputStream fileIn2;
+        try {
+            fileIn2 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempEmpleado.txt");
+            ObjectInputStream in2 = new ObjectInputStream(fileIn2);
+
+
+
+            try {
+                Object obj = in2.readObject();
+
+                while (obj != null) {
+                    empleados.add((Empleado) obj);
+                    obj = in2.readObject();
+
+                }
+            } catch (EOFException e) {
+
+            }
+
+            in2.close();
+            fileIn2.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        FileInputStream fileIn3;
+        try {
+            fileIn3 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempProveedor.txt");
+            ObjectInputStream in3 = new ObjectInputStream(fileIn3);
+
+
+
+            try {
+                Object obj = in3.readObject();
+
+                while (obj != null) {
+                    proveedores.add((Proveedor) obj);
+                    obj = in3.readObject();
+
+                }
+            } catch (EOFException e) {
+
+            }
+
+            in3.close();
+            fileIn3.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        FileInputStream fileIn4;
+        try {
+            fileIn4 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempNeveras.txt");
+            ObjectInputStream in4 = new ObjectInputStream(fileIn4);
+
+
+
+            try {
+                Object obj = in4.readObject();
+
+                while (obj != null) {
+                    neveras.add((Nevera) obj);
+                    obj = in4.readObject();
+
+                }
+            } catch (EOFException e) {
+
+            }
+
+            in4.close();
+            fileIn4.close();
+
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        FileInputStream fileIn5;
+        try {
+            fileIn5 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempMedicamentosTotales.txt");
+            ObjectInputStream in5 = new ObjectInputStream(fileIn5);
+
+
+
+            try {
+                Object obj = in5.readObject();
+
+                while (obj != null) {
+                    medicamentosTotales.add((Medicamento) obj);
+                    obj = in5.readObject();
+
+                }
+            } catch (EOFException e) {
+
+            }
+
+            in5.close();
+            fileIn5.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        FileInputStream fileIn6;
+        try {
+            fileIn6 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempPedidos.txt");
+            ObjectInputStream in6 = new ObjectInputStream(fileIn6);
+
+
+
+            try {
+                Object obj = in6.readObject();
+
+                while (obj != null) {
+                    pedidos.add((Medicamento) obj);
+                    obj = in6.readObject();
+
+                }
+            } catch (EOFException e) {
+
+            }
+
+            in6.close();
+            fileIn6.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        FileInputStream fileIn7;
+        try {
+            fileIn7 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempClientes.txt");
+            ObjectInputStream in7 = new ObjectInputStream(fileIn7);
+
+
+
+            try {
+                Object obj = in7.readObject();
+
+                while (obj != null) {
+                    clientes.add((Cliente) obj);
+                    obj = in7.readObject();
+
+                }
+            } catch (EOFException e) {
+
+            }
+
+            in7.close();
+            fileIn7.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+        }
+
         String option;
         label:
         while (true) {
@@ -256,6 +483,143 @@ public class Interfaz {
     }
 
     private static void salirCancelar() {
+
+        FileOutputStream fileOut;
+        try {
+            fileOut = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempFarmaceutico.txt");
+
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+            for (Farmaceutico farmaceutico : farmaceuticos) {
+                out.writeObject(farmaceutico);
+            }
+
+            out.close();
+            fileOut.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        FileOutputStream fileOut2;
+        try {
+            fileOut2 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempEmpleado.txt");
+
+            ObjectOutputStream out2 = new ObjectOutputStream(fileOut2);
+
+            for (Empleado empleado : empleados) {
+                out2.writeObject(empleado);
+            }
+            out2.close();
+            fileOut2.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        FileOutputStream fileOut3;
+        try {
+            fileOut3 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempProveedor.txt");
+
+            ObjectOutputStream out3 = new ObjectOutputStream(fileOut3);
+
+            for (Proveedor proveedor : proveedores) {
+                out3.writeObject(proveedor);
+            }
+            out3.close();
+            fileOut3.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        FileOutputStream fileOut4;
+        try {
+            fileOut4 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempNeveras.txt");
+
+            ObjectOutputStream out4 = new ObjectOutputStream(fileOut4);
+
+            for (Nevera nevera : neveras) {
+                out4.writeObject(nevera);
+            }
+            out4.close();
+            fileOut4.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        FileOutputStream fileOut5;
+        try {
+            fileOut5 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempClientes.txt");
+
+            ObjectOutputStream out5 = new ObjectOutputStream(fileOut5);
+
+            for (Cliente cliente : clientes) {
+                out5.writeObject(cliente);
+            }
+            out5.close();
+            fileOut5.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        FileOutputStream fileOut6;
+        try {
+            fileOut6 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempPedidos.txt");
+
+            ObjectOutputStream out6 = new ObjectOutputStream(fileOut6);
+
+            for (Medicamento pedido : pedidos) {
+                out6.writeObject(pedido);
+            }
+
+            out6.close();
+            fileOut6.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        FileOutputStream fileOut7;
+        try {
+            fileOut7 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempMedicamentosTotales.txt");
+
+            ObjectOutputStream out7 = new ObjectOutputStream(fileOut7);
+
+
+            for (Medicamento medicamento : medicamentosTotales) {
+                out7.writeObject((medicamento));
+            }
+            out7.close();
+            fileOut7.close();
+
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
         while (true) {
             System.out.println("Si sale ahora se perderan los cambios sin guardar");
             System.out.println("Ingrese [N] si desea regresar al  menu principal");
@@ -431,6 +795,7 @@ public class Interfaz {
                 break;
         }
     }
+
     public static void registrarFarmaceutico() {
         //Registro de documento farmaceutico
         System.out.print("Documento : ");
@@ -466,11 +831,14 @@ public class Interfaz {
             Password = input.nextLine();
         }
         //Creacion del objeto farmaceutico
+
         Farmaceutico nuevoFarmaceutico = new Farmaceutico(Nombre, Edad, Documento, Password);
+
         farmaceuticos.add(nuevoFarmaceutico);
         System.out.println("FARMACEUTICO REGISTRADO EXITOSAMENTE");
         ingresarFarmaceutico();
     }
+
     public static void RegistrarProveedor() {
         System.out.println("Ingrese NIT de proveedor: ");
         int NIT = input.nextInt();
@@ -486,6 +854,7 @@ public class Interfaz {
         proveedores.add(proveedor);
         System.out.println("Proveedor registrado satisfactoriamente!!");
     }
+
     public static void registrarCliente() {
         System.out.print("Documento : ");
         int Documento = input.nextInt();
@@ -511,11 +880,12 @@ public class Interfaz {
             direccion = input.nextLine();
         }
 
-        Cliente nuevoCliente = new Cliente(Nombre,Documento,direccion);
+        Cliente nuevoCliente = new Cliente(Nombre, Documento, direccion);
         clientes.add(nuevoCliente);
         System.out.println("ClIENTE REGISTRADO EXITOSAMENTE");
     }
-    public static void registrarEmpleado(){
+
+    public static void registrarEmpleado() {
         System.out.println("Ingrese nombre de empleado: ");
         String nombre = input.next();
         System.out.println("Ingrese edad de empleado: ");
@@ -536,7 +906,7 @@ public class Interfaz {
         System.out.println("Empleado registrado exitosamente");
     }
 
-    public static void Eliminar(){
+    public static void Eliminar() {
         String option;
         System.out.println("-----------------------------");
         System.out.println("Escoja una opcion:");
@@ -560,44 +930,48 @@ public class Interfaz {
                 break;
         }
     }
-    public static void eliminarFarmaceutico(){
+
+    public static void eliminarFarmaceutico() {
         System.out.println("Ingrese el documento: ");
         int documento = input.nextInt();
-        for(Farmaceutico farmaceutico : farmaceuticos){
-            if (farmaceutico.getDocumento() == documento){
+        for (Farmaceutico farmaceutico : farmaceuticos) {
+            if (farmaceutico.getDocumento() == documento) {
                 farmaceuticos.remove(farmaceutico);
             } else {
                 System.out.println("No se encuentra el farmaceutico!");
             }
         }
     }
-    public static void eliminarEmpleado(){
+
+    public static void eliminarEmpleado() {
         System.out.println("Ingrese el documento: ");
         int documento = input.nextInt();
-        for(Empleado empleado : empleados){
-            if (empleado.getDocumento() == documento){
+        for (Empleado empleado : empleados) {
+            if (empleado.getDocumento() == documento) {
                 empleados.remove(empleado);
             } else {
                 System.out.println("No se encuentra el empleado!");
             }
         }
     }
-    public static void eliminarCliente(){
+
+    public static void eliminarCliente() {
         System.out.println("Ingrese el documento: ");
         int documento = input.nextInt();
-        for(Cliente cliente : clientes){
-            if (cliente.getDocumento() == documento){
+        for (Cliente cliente : clientes) {
+            if (cliente.getDocumento() == documento) {
                 clientes.remove(cliente);
             } else {
                 System.out.println("No se encuentra el cliente!");
             }
         }
     }
-    public static void eliminarProveedor(){
+
+    public static void eliminarProveedor() {
         System.out.println("Ingrese el NIT del proveedor: ");
         int NIT = input.nextInt();
-        for(Proveedor proveedor : proveedores){
-            if (proveedor.getNIT() == NIT){
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getNIT() == NIT) {
                 proveedores.remove(proveedor);
             } else {
                 System.out.println("No se encuentra el proveedor!");

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
+
 public class Cliente extends Persona {
 	public static LinkedList<Cliente> clientes = new LinkedList<>();
 	private String direccion;

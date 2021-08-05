@@ -17,4 +17,8 @@ public class Farmaceutico extends Persona{
     public void setPassword(String password){
         this.password = password;
     }
+
+    public String toString(){
+        return "Nombre: " + getNombre() +" Edad: " + getEdad() +" Documento: " + getDocumento() +" password: " + getPassword() ;
+    }
 }

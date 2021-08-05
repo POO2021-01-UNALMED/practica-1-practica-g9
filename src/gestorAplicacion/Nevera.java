@@ -1,8 +1,9 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Nevera {
+public class Nevera implements Serializable {
     public LinkedList<Medicamento> cuenta = new LinkedList<>();
     public LinkedList<String> medicamentos = new LinkedList<>();
     private int capacidad;

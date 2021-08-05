@@ -1,6 +1,8 @@
 package gestorAplicacion;
 
-public class Medicamento {
+import java.io.Serializable;
+
+public class Medicamento implements Serializable {
 	private final String nombre;
 	private Proveedor prov;
 	private int cantidad; //cantidad del medicamento en el inventario
