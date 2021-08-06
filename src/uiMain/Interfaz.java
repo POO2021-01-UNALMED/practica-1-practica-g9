@@ -18,6 +18,7 @@ public class Interfaz {
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
     public static LinkedList<Medicamento> pedidos = new LinkedList<>();
+    public static LinkedList<Venta> ventasTotales = new LinkedList<>();
 
 
     public static void main(String[] args) {
@@ -181,7 +182,7 @@ public class Interfaz {
         }
         FileInputStream fileIn6;
         try {
-            fileIn6 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempPedidos.txt");
+            fileIn6 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempVentas.txt");
             ObjectInputStream in6 = new ObjectInputStream(fileIn6);
 
 
@@ -190,7 +191,7 @@ public class Interfaz {
                 Object obj = in6.readObject();
 
                 while (obj != null) {
-                    pedidos.add((Medicamento) obj);
+                    ventasTotales.add((Venta) obj);
                     obj = in6.readObject();
 
                 }
@@ -309,7 +310,7 @@ public class Interfaz {
             System.out.println("1. Vender");
             System.out.println("2. Inventario");
             System.out.println("3. Registro");
-            System.out.println("4. Metodo4");
+            System.out.println("4. Ventas Totales");
             System.out.println("5. Metodo4");
             System.out.println("0. Salir y cancelar");
             System.out.println("-----------------------------");
@@ -325,7 +326,7 @@ public class Interfaz {
                     Registro();
                     break;
                 case "4":
-                    //guardar();
+                    Ventas();
                     break;
                 case "0":
                     salirCancelar();
@@ -350,6 +351,16 @@ public class Interfaz {
             case "2" ->
                     //Recibir mercancia();
                     RecibirMercancia();
+        }
+    }
+
+    public static void Ventas() {
+        if (ventasTotales.isEmpty()) {
+            System.out.println("No hay ventas realizadas!");
+        } else {
+            for (Venta venta : ventasTotales) {
+                System.out.println(venta);
+            }
         }
     }
 
@@ -563,12 +574,12 @@ public class Interfaz {
         }
         FileOutputStream fileOut6;
         try {
-            fileOut6 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempPedidos.txt");
+            fileOut6 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempVentas.txt");
 
             ObjectOutputStream out6 = new ObjectOutputStream(fileOut6);
 
-            for (Medicamento pedido : pedidos) {
-                out6.writeObject(pedido);
+            for (Venta venta : ventasTotales) {
+                out6.writeObject(venta);
             }
 
             out6.close();
@@ -669,6 +680,9 @@ public class Interfaz {
         for (Medicamento pedido : pedidos) {
             System.out.println(pedido);
         }
+        Venta venta = new Venta(farmaceuticoLogueado);
+        venta.agregarMedicamento(pedidos);
+        ventasTotales.add(venta);
         pedidos.clear();
     }
 
@@ -714,6 +728,10 @@ public class Interfaz {
                     for (Medicamento pedido : pedidos) {
                         System.out.println(pedido);
                     }
+                    Venta venta = new Venta(cliente,farmaceuticoLogueado);
+                    venta.agregarMedicamento(pedidos);
+                    ventasTotales.add(venta);
+
                     System.out.println("-----------------------------------------------");
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
@@ -761,12 +779,16 @@ public class Interfaz {
         switch (option) {
             case "1":
                 registrarEmpleado();
+                break;
             case "2":
                 registrarFarmaceutico();
+                break;
             case "3":
                 registrarCliente();
+                break;
             case "4":
                 RegistrarProveedor();
+                break;
             case "0":
                 break;
         }

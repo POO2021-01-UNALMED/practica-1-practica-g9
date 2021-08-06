@@ -1,18 +1,21 @@
 package gestorAplicacion.Heredados;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class  Venta {
-    public static LinkedList<Venta> ventas = new LinkedList<>();
-    public static Scanner input = new Scanner(System.in);
+    public LinkedList<Medicamento> ventas = new LinkedList<>();
     private Cliente cliente;
     Farmaceutico farmaceutico;
-    private int precioTotal;
 
     public Venta(Cliente cliente, Farmaceutico farmaceutico) {
         this.cliente = cliente;
         this.farmaceutico = farmaceutico;
+    }
+    public Venta(Farmaceutico farmaceutico){
+        this.farmaceutico = farmaceutico;
+    }
+    public void agregarMedicamento(LinkedList<Medicamento> medicamentos){
+        ventas.addAll(medicamentos);
     }
 
     //Getters
@@ -25,7 +28,11 @@ public class  Venta {
         this.cliente = cliente;
     }
 
-
+    @Override
+    public String toString(){
+        return "Farmaceutico: " + farmaceutico.getNombre() + "CC: " + farmaceutico.getDocumento() + "\n" +
+                "Medicamentos: " + ventas;
+    }
 }
 
 

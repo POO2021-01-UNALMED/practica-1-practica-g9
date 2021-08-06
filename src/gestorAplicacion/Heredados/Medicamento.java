@@ -38,6 +38,6 @@ public class Medicamento implements Serializable {
 
 	@Override
 	public String toString(){
-		return " Nombre: " + this.getNombre() + " Cantidad: " + this.getCantidad();
+		return " Nombre: " + this.getNombre() + " Cantidad: " + this.getCantidad() + "\n";
 	}
 }
