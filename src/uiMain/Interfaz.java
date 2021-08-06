@@ -1,3 +1,9 @@
+/*Autores:
+Juan Pablo Escobar Marin,
+Kevin Jay Herrera,
+Keder Julian Madera Polo,
+Omar Chavez 
+*/
 package uiMain;
 
 import gestorAplicacion.Heredados.*;
