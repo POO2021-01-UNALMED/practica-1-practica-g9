@@ -1,6 +1,5 @@
 package uiMain;
 
-import gestorAplicacion.Abstracto.Vehiculo;
 import gestorAplicacion.Heredados.*;
 
 import java.io.*;
@@ -16,7 +15,6 @@ public class Interfaz {
     public static LinkedList<Empleado> empleados = new LinkedList<>();
     public static LinkedList<Proveedor> proveedores = new LinkedList<>();
     public static LinkedList<Nevera> neveras = new LinkedList<>();
-    public static LinkedList<Vehiculo> vehiculos = new LinkedList<>();
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
     public static Scanner input = new Scanner(System.in);
     public static LinkedList<Medicamento> pedidos = new LinkedList<>();
@@ -342,7 +340,6 @@ public class Interfaz {
         System.out.println("Escoja una opcion:");
         System.out.println("1. Revisar inventario");
         System.out.println("2. Recibir mercancia");
-        System.out.println("3. Registrar vehiculo nuevo.");
         System.out.println("0. Salir");
         System.out.println("-----------------------------");
         String option = input.next();
@@ -353,22 +350,7 @@ public class Interfaz {
             case "2" ->
                     //Recibir mercancia();
                     RecibirMercancia();
-            case "3" ->
-                    // Registrar un vehículo
-                    RegistroVehiculo();
         }
-    }
-
-    public static void RegistroVehiculo() {
-        System.out.println("Ingrese modelo del vehículo:");
-        String Model = input.next();
-        System.out.println("Ingrese las placas del vehículo: ");
-        String placas = input.next();
-        System.out.println("Ingrese cc del encargado: ");
-        int cc = input.nextInt();
-        Vehiculo vehiculo = new Vehiculo(placas, Model, cc);
-        vehiculos.add(vehiculo);
-        System.out.println("----VEHICULO REGISTRADO EXITOSAMENTE----");
     }
 
     public static void RevisarInventario() {
@@ -735,11 +717,6 @@ public class Interfaz {
                     System.out.println("-----------------------------------------------");
                     System.out.println("Su pedido se enviará a la siguiente dirección: " +
                             cliente.getDireccion());
-                    for (Vehiculo vehiculo : vehiculos) {
-                        if (vehiculo.getDisponibilidad()) {
-                            vehiculo.entrega(cliente.getDireccion(), pedidos, vehiculo.getPlaca());
-                        }
-                    }
                 } else {
                     System.out.println("Usuario no encontrado." + "Registre a su cliente.");
                     registrarCliente();
