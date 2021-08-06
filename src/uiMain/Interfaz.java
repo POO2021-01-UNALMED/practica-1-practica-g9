@@ -12,7 +12,6 @@ import static gestorAplicacion.Heredados.Cliente.clientes;
 public class Interfaz {
     public static Farmaceutico farmaceuticoLogueado = new Farmaceutico(null, 0, 0, null);
     public static LinkedList<Farmaceutico> farmaceuticos = new LinkedList<>();
-    public static LinkedList<Empleado> empleados = new LinkedList<>();
     public static LinkedList<Proveedor> proveedores = new LinkedList<>();
     public static LinkedList<Nevera> neveras = new LinkedList<>();
     public static LinkedList<Medicamento> medicamentosTotales = new LinkedList<>();
@@ -40,38 +39,6 @@ public class Interfaz {
             }
             in.close();
             fileIn.close();
-
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-
-            e.printStackTrace();
-        }
-        FileInputStream fileIn2;
-        try {
-            fileIn2 = new FileInputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempEmpleado.txt");
-            ObjectInputStream in2 = new ObjectInputStream(fileIn2);
-
-
-
-            try {
-                Object obj = in2.readObject();
-
-                while (obj != null) {
-                    empleados.add((Empleado) obj);
-                    obj = in2.readObject();
-
-                }
-            } catch (EOFException e) {
-
-            }
-
-            in2.close();
-            fileIn2.close();
 
         } catch (FileNotFoundException e) {
 
@@ -496,25 +463,6 @@ public class Interfaz {
 
             e.printStackTrace();
         }
-        FileOutputStream fileOut2;
-        try {
-            fileOut2 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempEmpleado.txt");
-
-            ObjectOutputStream out2 = new ObjectOutputStream(fileOut2);
-
-            for (Empleado empleado : empleados) {
-                out2.writeObject(empleado);
-            }
-            out2.close();
-            fileOut2.close();
-
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
         FileOutputStream fileOut3;
         try {
             fileOut3 = new FileOutputStream(System.getProperty("user.dir") + "\\src\\baseDatos\\tempProveedor.txt");
@@ -769,24 +717,20 @@ public class Interfaz {
         String option;
         System.out.println("-----------------------------");
         System.out.println("Escoja una opcion:");
-        System.out.println("1. Empleado");
-        System.out.println("2. Farmaceutico");
-        System.out.println("3. Cliente");
-        System.out.println("4. Proveedor");
+        System.out.println("1. Farmaceutico");
+        System.out.println("2. Cliente");
+        System.out.println("3. Proveedor");
         System.out.println("0. Salir");
         System.out.println("-----------------------------");
         option = input.next();
         switch (option) {
             case "1":
-                registrarEmpleado();
-                break;
-            case "2":
                 registrarFarmaceutico();
                 break;
-            case "3":
+            case "2":
                 registrarCliente();
                 break;
-            case "4":
+            case "3":
                 RegistrarProveedor();
                 break;
             case "0":
@@ -881,46 +825,22 @@ public class Interfaz {
         System.out.println("ClIENTE REGISTRADO EXITOSAMENTE");
     }
 
-    public static void registrarEmpleado() {
-        System.out.println("Ingrese nombre de empleado: ");
-        String nombre = input.next();
-        System.out.println("Ingrese edad de empleado: ");
-        int edad = input.nextInt();
-        System.out.println("Ingrese documento de empleado: ");
-        int documento = input.nextInt();
-        System.out.println("Ingrese direccion de empleado: ");
-        String direccion = input.next();
-        System.out.println("Ingrese telefono de empleado");
-        int telefono = input.nextInt();
-        System.out.println("Ingrese cargo de empleado");
-        String cargo = input.next();
-
-        input.nextLine();
-
-        Empleado empleado = new Empleado(nombre, edad, documento, direccion, telefono, cargo);
-        empleados.add(empleado);
-        System.out.println("Empleado registrado exitosamente");
-    }
-
     public static void Eliminar() {
         String option;
         System.out.println("-----------------------------");
         System.out.println("Escoja una opcion:");
-        System.out.println("1. Empleado");
-        System.out.println("2. Farmaceutico");
-        System.out.println("3. Cliente");
-        System.out.println("4. Proveedor");
+        System.out.println("1. Farmaceutico");
+        System.out.println("2. Cliente");
+        System.out.println("3. Proveedor");
         System.out.println("0. Salir");
         System.out.println("-----------------------------");
         option = input.next();
         switch (option) {
             case "1":
-                eliminarEmpleado();
-            case "2":
                 eliminarFarmaceutico();
-            case "3":
+            case "2":
                 eliminarCliente();
-            case "4":
+            case "3":
                 eliminarProveedor();
             case "0":
                 break;
@@ -935,18 +855,6 @@ public class Interfaz {
                 farmaceuticos.remove(farmaceutico);
             } else {
                 System.out.println("No se encuentra el farmaceutico!");
-            }
-        }
-    }
-
-    public static void eliminarEmpleado() {
-        System.out.println("Ingrese el documento: ");
-        int documento = input.nextInt();
-        for (Empleado empleado : empleados) {
-            if (empleado.getDocumento() == documento) {
-                empleados.remove(empleado);
-            } else {
-                System.out.println("No se encuentra el empleado!");
             }
         }
     }

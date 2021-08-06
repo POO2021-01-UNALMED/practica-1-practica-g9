@@ -1,7 +1,5 @@
 package gestorAplicacion.Heredados;
 
-import gestorAplicacion.Heredados.Medicamento;
-
 import java.io.Serializable;
 import java.util.LinkedList;
 
